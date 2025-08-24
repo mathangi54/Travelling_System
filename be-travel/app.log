@@ -1,0 +1,8 @@
+2025-08-05 11:58:15,290 - __main__ - INFO - Database tables initialized successfully
+2025-08-05 11:58:15,342 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:58:15,353 - werkzeug - INFO -  * Debugger PIN: 110-758-841
+2025-08-05 12:04:12,522 - __main__ - INFO - Incoming request: GET /api/tours
+2025-08-05 12:04:12,532 - __main__ - INFO - Response: GET /api/tours -> 200
+2025-08-05 12:04:12,539 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:04:12] "GET /api/tours HTTP/1.1" 200 -
+2025-08-05 12:04:12,881 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:04:12] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-05 12:32:18,981 - werkzeug - INFO -  * Detected change in 'D:\\Theebi\\Mathangi\\travel_system\\my-project\\be-travel\\app.py', reloading
