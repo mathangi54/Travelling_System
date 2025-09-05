@@ -9,7 +9,7 @@ const AITrainingDashboard = () => {
   const [trainingHistory, setTrainingHistory] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
   const [pricingData, setPricingData] = useState(null);
-  const [selectedTour, setSelectedTour] = useState(1);
+  const [selectedTour] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [authDebug, setAuthDebug] = useState('');
