@@ -69,36 +69,65 @@ const useAppInitialization = () => {
   return { isInitialized, initError };
 };
 
-// Enhanced Protected Route with role-based access
+// Enhanced Protected Route with role-based access and debugging
 function ProtectedRoute({ children, requireAdmin = false, requireAuth = true }) {
-  const { currentUser, loading } = useAuth();
+  const { currentUser, loading, isAuthenticated } = useAuth();
   const location = useLocation();
+
+  // Debug logging
+  console.log('ProtectedRoute check:', {
+    currentUser: currentUser,
+    loading: loading,
+    isAuthenticated: isAuthenticated,
+    requireAdmin: requireAdmin,
+    requireAuth: requireAuth,
+    userRole: currentUser?.role,
+    pathname: location.pathname
+  });
 
   if (loading) {
     return <PageLoader />;
   }
 
-  if (requireAuth && !currentUser) {
+  // Check authentication first
+  if (requireAuth && (!currentUser || !isAuthenticated)) {
+    console.log('Access denied: User not authenticated');
     return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
+  // Check admin role if required
   if (requireAdmin && currentUser?.role !== 'admin') {
+    console.log('Access denied: Admin role required, user role:', currentUser?.role);
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Access Denied</h1>
-          <p className="text-gray-600 mb-4">You don't have permission to access this page.</p>
-          <button
-            onClick={() => window.location.href = '/'}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Go to Homepage
-          </button>
+          <p className="text-gray-600 mb-4">
+            This page requires admin privileges. Your current role: {currentUser?.role || 'none'}
+          </p>
+          <p className="text-sm text-gray-500 mb-4">
+            Contact an administrator to get admin access, or try logging in with an admin account.
+          </p>
+          <div className="space-x-4">
+            <button
+              onClick={() => window.location.href = '/'}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Go to Homepage
+            </button>
+            <button
+              onClick={() => window.location.href = '/login'}
+              className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+            >
+              Login as Different User
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
+  console.log('Access granted to protected route');
   return children;
 }
 
@@ -177,15 +206,27 @@ function AppContent() {
             } 
           />
 
-          {/* Admin Routes */}
+          {/* CHANGED: AI Training Dashboard - Now requires only authentication, not admin */}
           <Route 
             path="/ai-training" 
             element={
-              <ProtectedRoute requireAdmin={true}>
+              <ProtectedRoute requireAuth={true} requireAdmin={false}>
                 <AITrainingDashboard />
               </ProtectedRoute>
             } 
           />
+
+          {/* If you want to create an admin-only route, you can add it like this: */}
+          {/* 
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute requireAdmin={true}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          */}
 
           {/* Catch all route - 404 */}
           <Route path="*" element={<NotFoundPage />} />

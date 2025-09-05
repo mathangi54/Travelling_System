@@ -3,7 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { useAuth } from '../context/AuthContext';
 
 const AITrainingDashboard = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
   const [trainingStatus, setTrainingStatus] = useState('idle');
   const [aiStatus, setAiStatus] = useState(null);
   const [trainingHistory, setTrainingHistory] = useState(null);
@@ -12,14 +12,72 @@ const AITrainingDashboard = () => {
   const [selectedTour, setSelectedTour] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [authDebug, setAuthDebug] = useState('');
 
   const API_BASE_URL = 'http://localhost:5000/api';
+
+  // Helper function to get authentication token
+  const getAuthToken = () => {
+    // Check multiple possible token storage keys
+    const token = localStorage.getItem('token') || 
+                  localStorage.getItem('authToken') || 
+                  sessionStorage.getItem('token') || 
+                  sessionStorage.getItem('authToken');
+    
+    console.log('Retrieved token:', token ? 'Token found' : 'No token found');
+    return token;
+  };
+
+  // Helper function to make authenticated API calls
+  const makeAuthenticatedRequest = async (url, options = {}) => {
+    const token = getAuthToken();
+    
+    if (!token) {
+      throw new Error('No authentication token found. Please login again.');
+    }
+
+    const defaultOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        ...options.headers
+      }
+    };
+
+    const requestOptions = {
+      ...options,
+      headers: {
+        ...defaultOptions.headers,
+        ...options.headers
+      }
+    };
+
+    console.log('Making request to:', url);
+    console.log('With options:', requestOptions);
+
+    const response = await fetch(url, requestOptions);
+    
+    // Handle token expiration
+    if (response.status === 401) {
+      console.log('Token expired or invalid, logging out...');
+      logout();
+      localStorage.removeItem('token');
+      localStorage.removeItem('authToken');
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('authToken');
+      throw new Error('Authentication expired. Please login again.');
+    }
+
+    return response;
+  };
 
   // Check AI model status and get training history
   const checkAIStatus = async () => {
     try {
+      setError(null);
       const response = await fetch(`${API_BASE_URL}/ai-status`);
       const data = await response.json();
+      
       if (response.ok) {
         setAiStatus(data.data);
         
@@ -29,7 +87,7 @@ const AITrainingDashboard = () => {
           setTrainingHistory(history);
         }
         
-        setError(null);
+        console.log('AI Status loaded successfully:', data.data);
       } else {
         setError(data.message || 'Failed to fetch AI status');
       }
@@ -57,7 +115,7 @@ const AITrainingDashboard = () => {
       
       if (response.ok) {
         setTrainingStatus('completed');
-        checkAIStatus(); // Refresh AI status and get training history
+        await checkAIStatus(); // Refresh AI status and get training history
         alert('Training completed successfully!');
       } else {
         setTrainingStatus('failed');
@@ -82,28 +140,44 @@ const AITrainingDashboard = () => {
     }
 
     setLoading(true);
+    setError(null);
+    
     try {
-      const token = localStorage.getItem('token') || localStorage.getItem('authToken');
-      const response = await fetch(`${API_BASE_URL}/ai-recommendations`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      const token = getAuthToken();
       
+      if (!token) {
+        setError('No authentication token found. Please login again.');
+        setAuthDebug('Token missing from localStorage/sessionStorage');
+        return;
+      }
+
+      setAuthDebug(`Token found, making request for user: ${currentUser?.username || currentUser?.id}`);
+
+      const response = await makeAuthenticatedRequest(`${API_BASE_URL}/ai-recommendations`);
       const data = await response.json();
+      
       if (response.ok) {
         setRecommendations(data.data.tours || []);
-        setError(null);
+        setAuthDebug('Recommendations loaded successfully');
+        console.log('AI Recommendations loaded:', data.data);
       } else {
         setError(data.message || 'Failed to get recommendations');
+        setAuthDebug(`API Error: ${response.status} - ${data.message}`);
+        
         if (response.status === 503) {
           alert('AI models not loaded. Please train models first.');
+        } else if (response.status === 401) {
+          alert('Authentication failed. Please login again.');
         }
       }
     } catch (error) {
       console.error('Error getting recommendations:', error);
-      setError('Failed to get recommendations');
+      setError(error.message || 'Failed to get recommendations');
+      setAuthDebug(`Network Error: ${error.message}`);
+      
+      if (error.message.includes('Authentication expired')) {
+        alert('Your session has expired. Please login again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -112,24 +186,32 @@ const AITrainingDashboard = () => {
   // Get AI pricing
   const getAIPricing = async () => {
     setLoading(true);
+    setError(null);
+    
     try {
+      const requestBody = {
+        tour_id: selectedTour,
+        user_id: currentUser?.id || 1,
+        guests: 2,
+        travel_date: '2024-12-15'
+      };
+
+      console.log('AI Pricing request body:', requestBody);
+
       const response = await fetch(`${API_BASE_URL}/ai-pricing`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          tour_id: selectedTour,
-          user_id: currentUser?.id || 1,
-          guests: 2,
-          travel_date: '2024-12-15'
-        })
+        body: JSON.stringify(requestBody)
       });
       
       const data = await response.json();
+      
       if (response.ok) {
         setPricingData(data.data);
         setError(null);
+        console.log('AI Pricing loaded:', data.data);
       } else {
         setError(data.message || 'Failed to get AI pricing');
         if (response.status === 503) {
@@ -142,6 +224,24 @@ const AITrainingDashboard = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Debug auth state
+  const debugAuthState = () => {
+    const token = getAuthToken();
+    const debugInfo = {
+      currentUser: currentUser,
+      tokenExists: !!token,
+      tokenLength: token ? token.length : 0,
+      localStorage_token: !!localStorage.getItem('token'),
+      localStorage_authToken: !!localStorage.getItem('authToken'),
+      sessionStorage_token: !!sessionStorage.getItem('token'),
+      sessionStorage_authToken: !!sessionStorage.getItem('authToken')
+    };
+    
+    console.log('Auth Debug Info:', debugInfo);
+    setAuthDebug(JSON.stringify(debugInfo, null, 2));
+    alert('Check console for auth debug info');
   };
 
   // Format training history for charts
@@ -162,7 +262,12 @@ const AITrainingDashboard = () => {
 
   useEffect(() => {
     checkAIStatus();
-  }, []);
+    
+    // Debug auth state on mount
+    const token = getAuthToken();
+    console.log('Component mounted. Current user:', currentUser);
+    console.log('Token available:', !!token);
+  }, [currentUser]);
 
   const trainingProgressData = getTrainingProgressData();
 
@@ -171,11 +276,50 @@ const AITrainingDashboard = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">AI Training Dashboard</h1>
-          <p className="text-gray-600">Manage and monitor your AI-powered tour recommendation system</p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">AI Training Dashboard</h1>
+              <p className="text-gray-600">Manage and monitor your AI-powered tour recommendation system</p>
+              {currentUser && (
+                <p className="text-sm text-blue-600 mt-1">
+                  Logged in as: {currentUser.username || currentUser.email}
+                </p>
+              )}
+            </div>
+            <div className="text-right">
+              <button
+                onClick={debugAuthState}
+                className="px-3 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300 mr-2"
+              >
+                Debug Auth
+              </button>
+              {currentUser && (
+                <button
+                  onClick={logout}
+                  className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                >
+                  Logout
+                </button>
+              )}
+            </div>
+          </div>
+          
           {error && (
             <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-              {error}
+              <strong>Error:</strong> {error}
+            </div>
+          )}
+          
+          {authDebug && (
+            <div className="mt-4 p-4 bg-blue-100 border border-blue-400 text-blue-700 rounded">
+              <strong>Auth Debug:</strong>
+              <pre className="text-xs mt-2 whitespace-pre-wrap">{authDebug}</pre>
+            </div>
+          )}
+          
+          {!currentUser && (
+            <div className="mt-4 p-4 bg-yellow-100 border border-yellow-400 text-yellow-700 rounded">
+              <strong>Authentication Required:</strong> Please login to access AI recommendations feature.
             </div>
           )}
         </div>
@@ -268,14 +412,15 @@ const AITrainingDashboard = () => {
 
             <button
               onClick={getAIRecommendations}
-              disabled={!aiStatus?.models_loaded || loading}
+              disabled={!aiStatus?.models_loaded || loading || !currentUser}
               className={`px-6 py-2 rounded-lg font-medium ${
-                !aiStatus?.models_loaded || loading
+                !aiStatus?.models_loaded || loading || !currentUser
                   ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   : 'bg-purple-600 text-white hover:bg-purple-700'
               }`}
             >
               Get AI Recommendations
+              {!currentUser && ' (Login Required)'}
             </button>
 
             <button
@@ -493,6 +638,7 @@ const AITrainingDashboard = () => {
             <h3 className="font-semibold text-yellow-800 mb-2">Training Instructions:</h3>
             <ol className="list-decimal list-inside text-sm text-yellow-700 space-y-1">
               <li>Ensure 'tour_package.csv' is in your backend directory</li>
+              <li>Login to your account to access AI recommendations</li>
               <li>Click 'Start Training' to train the AI models with your dataset</li>
               <li>Monitor the training progress and accuracy metrics</li>
               <li>Once training is complete, test AI recommendations and pricing</li>

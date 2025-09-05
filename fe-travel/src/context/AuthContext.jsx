@@ -20,38 +20,83 @@ export const AuthProvider = ({ children }) => {
 
   // Initialize authentication state on app load
   useEffect(() => {
-    const initializeAuth = () => {
+    const initializeAuth = async () => {
       try {
+        console.log('AuthContext: Initializing auth...');
+        
         const token = localStorage.getItem('token') || localStorage.getItem('authToken');
         const userData = localStorage.getItem('user');
 
-        console.log('AuthContext: Initializing auth...');
         console.log('AuthContext: Token found:', !!token);
         console.log('AuthContext: User data found:', !!userData);
 
         if (token && userData) {
           try {
             const user = JSON.parse(userData);
-            setCurrentUser(user);
-            setIsAuthenticated(true);
-            console.log('AuthContext: User restored from localStorage:', user);
+            console.log('AuthContext: Parsed user data:', user);
+            
+            // Validate token with backend (optional, but recommended)
+            const isValid = await validateTokenSilently(token);
+            
+            if (isValid) {
+              setCurrentUser(user);
+              setIsAuthenticated(true);
+              console.log('AuthContext: User restored from localStorage:', user);
+            } else {
+              console.log('AuthContext: Token validation failed, clearing auth data');
+              clearAuthData();
+            }
           } catch (error) {
             console.error('AuthContext: Error parsing stored user data:', error);
-            // Clear corrupted data
-            localStorage.removeItem('user');
-            localStorage.removeItem('token');
-            localStorage.removeItem('authToken');
+            clearAuthData();
           }
+        } else {
+          console.log('AuthContext: No stored auth data found');
         }
       } catch (error) {
         console.error('AuthContext: Error initializing auth:', error);
       } finally {
         setLoading(false);
+        console.log('AuthContext: Initialization complete');
       }
     };
 
     initializeAuth();
   }, []);
+
+  // Helper function to clear all auth data
+  const clearAuthData = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('currentBooking');
+    localStorage.removeItem('redirectAfterLogin');
+    setCurrentUser(null);
+    setIsAuthenticated(false);
+  };
+
+  // Silent token validation (doesn't throw errors)
+  const validateTokenSilently = async (token) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/validate`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.status === 'success';
+      }
+      return false;
+    } catch (error) {
+      console.warn('AuthContext: Silent token validation failed:', error);
+      // Return true on network errors to avoid unnecessary logouts
+      return true;
+    }
+  };
 
   // Login function
   const login = async ({ email, password }) => {
@@ -85,11 +130,13 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('authToken', token); // Backup key
         localStorage.setItem('user', JSON.stringify(user));
         
-        // Update state
+        // Update state immediately
         setCurrentUser(user);
         setIsAuthenticated(true);
         
         console.log('AuthContext: User logged in successfully:', user);
+        console.log('AuthContext: Auth state updated - isAuthenticated:', true);
+        
         return { success: true, user, token };
       } else {
         throw new Error(data.message || 'Login failed - invalid response format');
@@ -98,11 +145,7 @@ export const AuthProvider = ({ children }) => {
       console.error('AuthContext: Login error:', error);
       
       // Clear any existing auth data on login failure
-      localStorage.removeItem('token');
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('user');
-      setCurrentUser(null);
-      setIsAuthenticated(false);
+      clearAuthData();
       
       throw error;
     }
@@ -133,7 +176,21 @@ export const AuthProvider = ({ children }) => {
       console.log('AuthContext: Registration success:', data);
 
       if (data.status === 'success') {
-        return { success: true, message: data.message };
+        // Automatically log in the user after successful registration
+        if (data.data && data.data.token && data.data.user) {
+          const { token, user } = data.data;
+          
+          localStorage.setItem('token', token);
+          localStorage.setItem('authToken', token);
+          localStorage.setItem('user', JSON.stringify(user));
+          
+          setCurrentUser(user);
+          setIsAuthenticated(true);
+          
+          console.log('AuthContext: User auto-logged in after registration');
+        }
+        
+        return { success: true, message: data.message, autoLogin: !!data.data };
       } else {
         throw new Error(data.message || 'Registration failed');
       }
@@ -167,15 +224,7 @@ export const AuthProvider = ({ children }) => {
       console.warn('AuthContext: Error during logout:', error);
     } finally {
       // Always clear local auth data
-      localStorage.removeItem('token');
-      localStorage.removeItem('authToken');
-      localStorage.removeItem('user');
-      localStorage.removeItem('currentBooking');
-      localStorage.removeItem('redirectAfterLogin');
-      
-      setCurrentUser(null);
-      setIsAuthenticated(false);
-      
+      clearAuthData();
       console.log('AuthContext: User logged out successfully');
     }
   };
@@ -231,21 +280,58 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
-  // Check authentication status
+  // Check authentication status - IMPROVED VERSION
   const checkAuthStatus = () => {
     const token = getToken();
     const userExists = currentUser && Object.keys(currentUser).length > 0;
     const authFlag = isAuthenticated;
     
+    const isFullyAuthenticated = !!(token && userExists && authFlag);
+    
     console.log('AuthContext: Auth status check:', { 
       token: !!token, 
       userExists, 
       authFlag,
-      currentUser: currentUser?.email || 'None'
+      isFullyAuthenticated,
+      currentUser: currentUser?.email || currentUser?.username || 'None'
     });
     
-    return token && userExists && authFlag;
+    return isFullyAuthenticated;
   };
+
+  // Helper to check if user is logged in (simplified check)
+  const isLoggedIn = () => {
+    return isAuthenticated && currentUser !== null;
+  };
+
+  // Debug auth state
+  const debugAuthState = () => {
+    const debugInfo = {
+      currentUser: currentUser,
+      isAuthenticated: isAuthenticated,
+      loading: loading,
+      token: !!getToken(),
+      tokenValue: getToken()?.substring(0, 20) + '...',
+      localStorage: {
+        token: !!localStorage.getItem('token'),
+        authToken: !!localStorage.getItem('authToken'),
+        user: !!localStorage.getItem('user')
+      }
+    };
+    
+    console.log('AuthContext: Debug Auth State:', debugInfo);
+    return debugInfo;
+  };
+
+  // Effect to log auth state changes
+  useEffect(() => {
+    console.log('AuthContext: Auth state changed:', {
+      isAuthenticated,
+      hasUser: !!currentUser,
+      userEmail: currentUser?.email || currentUser?.username,
+      loading
+    });
+  }, [isAuthenticated, currentUser, loading]);
 
   const value = {
     currentUser,
@@ -258,7 +344,17 @@ export const AuthProvider = ({ children }) => {
     getToken,
     updateUser,
     checkAuthStatus,
+    isLoggedIn,
+    debugAuthState,
+    clearAuthData, // Exposed for emergency cleanup
   };
+
+  console.log('AuthContext: Rendering with state:', {
+    isAuthenticated,
+    hasCurrentUser: !!currentUser,
+    loading,
+    userInfo: currentUser ? `${currentUser.email || currentUser.username}` : 'None'
+  });
 
   return (
     <AuthContext.Provider value={value}>
