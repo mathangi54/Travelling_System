@@ -14,9 +14,9 @@ const PopularPackages = () => {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Popular Travel Packages</h2>
+        <h2 className="text-3xl font-bold text-gray-800 mb-2">Popular Sri Lankan Travel Packages</h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Discover our most sought-after vacation packages loved by travelers worldwide
+          Discover the Pearl of the Indian Ocean with our most sought-after Sri Lankan vacation packages
         </p>
       </div>
 
@@ -33,7 +33,7 @@ const PopularPackages = () => {
           onClick={handleViewMore}
           className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
-          View More
+          View All Sri Lankan Destinations
         </button>
       </div>
     </div>

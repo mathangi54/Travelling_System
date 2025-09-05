@@ -1,0 +1,185 @@
+{
+  "recommendation": {
+    "accuracy": 0.908997955010225,
+    "cv_mean": 0.9337134460694123,
+    "cv_std": 0.013243541842849918,
+    "feature_importance": [
+      {
+        "feature": "MonthlyIncome",
+        "importance": 0.10818969227851766
+      },
+      {
+        "feature": "Age",
+        "importance": 0.1014467214742716
+      },
+      {
+        "feature": "DurationOfPitch",
+        "importance": 0.10144088648373947
+      },
+      {
+        "feature": "Passport",
+        "importance": 0.08784434406715129
+      },
+      {
+        "feature": "PitchSatisfactionScore",
+        "importance": 0.054426906313002316
+      },
+      {
+        "feature": "MaritalStatus_encoded",
+        "importance": 0.0541267929287801
+      },
+      {
+        "feature": "ProductPitched_encoded",
+        "importance": 0.05096042290082462
+      },
+      {
+        "feature": "NumberOfTrips",
+        "importance": 0.048893148860306115
+      },
+      {
+        "feature": "NumberOfFollowups",
+        "importance": 0.04835392329937331
+      },
+      {
+        "feature": "PreferredPropertyStar",
+        "importance": 0.04317483856164981
+      },
+      {
+        "feature": "CityTier",
+        "importance": 0.038922806012425225
+      },
+      {
+        "feature": "Designation_encoded",
+        "importance": 0.038370322574891084
+      },
+      {
+        "feature": "Occupation_encoded",
+        "importance": 0.0330819606589715
+      },
+      {
+        "feature": "Family_Size",
+        "importance": 0.028820924638139532
+      },
+      {
+        "feature": "Age_Group_encoded",
+        "importance": 0.02601546631482439
+      },
+      {
+        "feature": "Gender_encoded",
+        "importance": 0.02392492756700673
+      },
+      {
+        "feature": "Travel_Experience_encoded",
+        "importance": 0.022009147598337955
+      },
+      {
+        "feature": "NumberOfPersonVisiting",
+        "importance": 0.02190865099537588
+      },
+      {
+        "feature": "TypeofContact_encoded",
+        "importance": 0.021330567714110304
+      },
+      {
+        "feature": "NumberOfChildrenVisiting",
+        "importance": 0.01953127305752487
+      },
+      {
+        "feature": "OwnCar",
+        "importance": 0.017804193784884244
+      },
+      {
+        "feature": "Income_Group_encoded",
+        "importance": 0.009422081915891731
+      }
+    ]
+  },
+  "pricing": {
+    "r2_score": 0.9982575314631104,
+    "rmse": 38.95741350187362,
+    "features": [
+      "Age",
+      "CityTier",
+      "NumberOfPersonVisiting",
+      "MonthlyIncome",
+      "PreferredPropertyStar",
+      "NumberOfTrips",
+      "PitchSatisfactionScore",
+      "Family_Size",
+      "TypeofContact_encoded",
+      "Occupation_encoded",
+      "Gender_encoded",
+      "ProductPitched_encoded",
+      "MaritalStatus_encoded",
+      "Designation_encoded",
+      "Age_Group_encoded",
+      "Income_Group_encoded",
+      "Travel_Experience_encoded"
+    ]
+  },
+  "segmentation": {
+    "n_clusters": 5,
+    "segment_analysis": {
+      "Segment_0": {
+        "size": 715,
+        "conversion_rate": 0.11888111888111888,
+        "avg_age": 49.13286713286713,
+        "avg_income": 32757.43216783217,
+        "avg_satisfaction": 3.3524475524475523,
+        "popular_products": {
+          "Super Deluxe": 271,
+          "King": 224,
+          "Standard": 164
+        }
+      },
+      "Segment_1": {
+        "size": 1174,
+        "conversion_rate": 0.19931856899488926,
+        "avg_age": 34.00425894378194,
+        "avg_income": 20222.988926746166,
+        "avg_satisfaction": 3.5664395229982966,
+        "popular_products": {
+          "Basic": 685,
+          "Deluxe": 365,
+          "Standard": 120
+        }
+      },
+      "Segment_2": {
+        "size": 1168,
+        "conversion_rate": 0.2363013698630137,
+        "avg_age": 34.62671232876713,
+        "avg_income": 22533.217465753423,
+        "avg_satisfaction": 2.9383561643835616,
+        "popular_products": {
+          "Deluxe": 668,
+          "Basic": 262,
+          "Standard": 213
+        }
+      },
+      "Segment_3": {
+        "size": 823,
+        "conversion_rate": 0.19927095990279464,
+        "avg_age": 40.53098420413123,
+        "avg_income": 23056.29404617254,
+        "avg_satisfaction": 3.0959902794653704,
+        "popular_products": {
+          "Deluxe": 345,
+          "Basic": 313,
+          "Standard": 125
+        }
+      },
+      "Segment_4": {
+        "size": 1008,
+        "conversion_rate": 0.1597222222222222,
+        "avg_age": 34.40376984126984,
+        "avg_income": 22519.630952380954,
+        "avg_satisfaction": 2.4623015873015874,
+        "popular_products": {
+          "Basic": 558,
+          "Deluxe": 322,
+          "Standard": 120
+        }
+      }
+    }
+  }
+}
