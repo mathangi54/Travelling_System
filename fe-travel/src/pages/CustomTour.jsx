@@ -1,93 +1,20 @@
 import React, { useState } from 'react';
+import { sriLankaDestinations } from '../data/destinationsData';
 
 const CustomTour = () => {
   const [selectedDestinations, setSelectedDestinations] = useState([]);
   const [duration, setDuration] = useState(7);
   const [budget, setBudget] = useState('medium');
-
-  // Sri Lanka destinations data
-  const sriLankaDestinations = [
-    {
-      id: 1,
-      name: 'Sigiriya',
-      region: 'Cultural Triangle',
-      type: 'Historical',
-      description: 'Ancient rock fortress with frescoes and lion paw entrance',
-      image: '/images/sigiriya.jpg',
-      bestTime: 'Year-round',
-      highlights: ['Lion Rock', 'Frescoes', 'Mirror Wall']
-    },
-    {
-      id: 2,
-      name: 'Kandy',
-      region: 'Central Province',
-      type: 'Cultural',
-      description: 'Sacred city with Temple of the Tooth Relic',
-      image: '/images/kandy.jpg',
-      bestTime: 'Year-round',
-      highlights: ['Temple of the Tooth', 'Kandy Lake', 'Cultural Show']
-    },
-    {
-      id: 3,
-      name: 'Galle',
-      region: 'Southern Province',
-      type: 'Coastal',
-      description: 'Dutch colonial fort with charming streets',
-      image: '/images/galle.jpg',
-      bestTime: 'Nov-Apr',
-      highlights: ['Galle Fort', 'Lighthouse', 'Jungle Beach']
-    },
-    {
-      id: 4,
-      name: 'Ella',
-      region: 'Uva Province',
-      type: 'Hill Country',
-      description: 'Scenic mountain town with waterfalls and tea plantations',
-      image: '/images/ella.jpg',
-      bestTime: 'Jan-Apr',
-      highlights: ['Nine Arch Bridge', 'Little Adam\'s Peak', 'Ravana Falls']
-    },
-    {
-      id: 5,
-      name: 'Yala National Park',
-      region: 'South East',
-      type: 'Wildlife',
-      description: 'Best for leopard spotting and diverse wildlife',
-      image: '/images/yala.jpg',
-      bestTime: 'Feb-Jul',
-      highlights: ['Safari Tours', 'Leopards', 'Bird Watching']
-    },
-    {
-      id: 6,
-      name: 'Nuwara Eliya',
-      region: 'Central Province',
-      type: 'Hill Country',
-      description: 'British colonial-style tea country with cool climate',
-      image: '/images/nuwara-eliya.jpg',
-      bestTime: 'Mar-May',
-      highlights: ['Tea Plantations', 'Gregory Lake', 'Hakgala Gardens']
-    },
-    {
-      id: 7,
-      name: 'Anuradhapura',
-      region: 'North Central',
-      type: 'Historical',
-      description: 'Ancient capital with well-preserved ruins',
-      image: '/images/anuradhapura.jpg',
-      bestTime: 'Year-round',
-      highlights: ['Sacred Bodhi Tree', 'Dagobas', 'Archaeological Museum']
-    },
-    {
-      id: 8,
-      name: 'Mirissa',
-      region: 'Southern Coast',
-      type: 'Beach',
-      description: 'Whale watching and beautiful beaches',
-      image: '/images/mirissa.jpg',
-      bestTime: 'Nov-Apr',
-      highlights: ['Whale Watching', 'Beaches', 'Surfing']
-    }
-  ];
+  const [showForm, setShowForm] = useState(false);
+  const [tourRequest, setTourRequest] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    travelDate: '',
+    travelers: 1,
+    specialRequests: ''
+  });
+  const [submitted, setSubmitted] = useState(false);
 
   const toggleDestination = (id) => {
     if (selectedDestinations.includes(id)) {
@@ -113,6 +40,40 @@ const CustomTour = () => {
     return Math.round((baseCost + durationCost) * budgetMultiplier);
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setTourRequest({
+      ...tourRequest,
+      [name]: name === 'travelers' ? parseInt(value) : value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you would typically send the data to your backend
+    console.log({
+      tourRequest,
+      selectedDestinations,
+      duration,
+      budget,
+      estimatedCost: calculateEstimatedCost()
+    });
+    setSubmitted(true);
+  };
+
+  const resetForm = () => {
+    setShowForm(false);
+    setSubmitted(false);
+    setTourRequest({
+      name: '',
+      email: '',
+      phone: '',
+      travelDate: '',
+      travelers: 1,
+      specialRequests: ''
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -124,6 +85,124 @@ const CustomTour = () => {
             Select destinations, choose duration and budget to plan your perfect trip
           </p>
         </div>
+
+        {/* Confirmation Form Modal */}
+        {showForm && (
+          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full mx-4">
+              {submitted ? (
+                <div className="text-center py-4">
+                  <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
+                  <p className="text-gray-600 mb-4">Your tour request has been submitted successfully.</p>
+                  <p className="text-gray-600 mb-6">Our travel experts will contact you within 24 hours to discuss your custom tour.</p>
+                  <button
+                    onClick={resetForm}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-medium"
+                  >
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4">Confirm Your Tour Request</h2>
+                  <div className="mb-4 p-3 bg-gray-50 rounded">
+                    <h3 className="font-medium text-gray-700">Tour Summary</h3>
+                    <p className="text-sm text-gray-600">
+                      {selectedPlaces.map(p => p.name).join(', ')}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      {duration} days • {budget} budget • ${calculateEstimatedCost()} per person
+                    </p>
+                  </div>
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={tourRequest.name}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={tourRequest.email}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={tourRequest.phone}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Travel Date</label>
+                      <input
+                        type="date"
+                        name="travelDate"
+                        value={tourRequest.travelDate}
+                        onChange={handleInputChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Number of Travelers</label>
+                      <input
+                        type="number"
+                        name="travelers"
+                        value={tourRequest.travelers}
+                        onChange={handleInputChange}
+                        min="1"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Special Requests</label>
+                      <textarea
+                        name="specialRequests"
+                        value={tourRequest.specialRequests}
+                        onChange={handleInputChange}
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div className="flex justify-end space-x-3">
+                      <button
+                        type="button"
+                        onClick={() => setShowForm(false)}
+                        className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-medium"
+                      >
+                        Submit Request
+                      </button>
+                    </div>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Destination Selection */}
@@ -216,7 +295,7 @@ const CustomTour = () => {
                     min="3"
                     max="21"
                     value={duration}
-                    onChange={(e) => setDuration(e.target.value)}
+                    onChange={(e) => setDuration(parseInt(e.target.value))}
                     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                   />
                   <div className="flex justify-between text-xs text-gray-500 mt-1">
@@ -257,7 +336,10 @@ const CustomTour = () => {
                   </p>
                 </div>
 
-                <button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-4 rounded-lg font-medium transition duration-300">
+                <button 
+                  onClick={() => setShowForm(true)}
+                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-4 rounded-lg font-medium transition duration-300"
+                >
                   Request Custom Tour
                 </button>
               </>
@@ -306,7 +388,7 @@ const CustomTour = () => {
               <div className="flex items-start">
                 <div className="flex-shrink-0 bg-indigo-100 p-2 rounded-lg">
                   <svg className="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 极速赛车开奖结果查询官网 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
                 <div className="ml-3">
@@ -332,7 +414,7 @@ const CustomTour = () => {
               <div className="flex items-start">
                 <div className="flex-shrink-0 bg-indigo-100 p-2 rounded-lg">
                   <svg className="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 极速赛车开奖结果查询官网 0 003 9c0 5.591 3.824 10.29 9 极速赛车开奖结果查询官网 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
                 <div className="ml-3">
