@@ -12,7 +12,7 @@ const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, is
   // Default values and helpers
   const getDefaultValue = (value, fallback) => value !== undefined ? value : fallback;
   const getRandomDays = () => Math.floor(Math.random() * 14) + 1;
-  const getRandomPrice = () => Math.floor(Math.random() * 2000) + 200;
+  const getRandomPrice = () => Math.floor(Math.random() * 46000) + 4000; // Prices between Rs. 4000 and Rs. 50,000
 
   useEffect(() => {
     // Fetch optimal price when component mounts if we have backend data
@@ -45,6 +45,7 @@ const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, is
         const data = await response.json();
         setOptimalPrice(data.data);
       }
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       console.log('AI pricing not available, using standard pricing');
     } finally {
@@ -123,8 +124,10 @@ const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, is
     onWishlistToggle?.(id, !is_wishlisted);
   };
 
-  const formatPrice = (amount) =>
-    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+  const formatPrice = (amount) => {
+    if (!amount) return 'Rs. 0';
+    return `Rs. ${new Intl.NumberFormat('en-US').format(Math.round(amount))}`;
+  };
 
   const discountPercentage = discount_price
     ? Math.round((1 - discount_price / price) * 100)

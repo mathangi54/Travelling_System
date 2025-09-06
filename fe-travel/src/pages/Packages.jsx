@@ -38,7 +38,9 @@ const Packages = () => {
           location: pkg.location || 'Sri Lanka',
           rating: pkg.rating || (Math.random() * 2 + 3).toFixed(1),
           reviews: pkg.reviews || Math.floor(Math.random() * 500) + 50,
-          duration_days: pkg.duration_days || Math.floor(Math.random() * 10) + 3
+          duration_days: pkg.duration_days || Math.floor(Math.random() * 10) + 3,
+          // Ensure price is between Rs. 4000 and Rs. 50,000
+          price: pkg.price && pkg.price >= 4000 && pkg.price <= 50000 ? pkg.price : Math.floor(Math.random() * 46000) + 4000
         }));
         
         setPackages(enhancedPackages);
@@ -53,9 +55,9 @@ const Packages = () => {
     } catch (error) {
       console.error('Error fetching packages:', error);
       console.warn('API connection failed, using static Sri Lankan packages');
-      setPackages(popularPackages);
-      setUsingStaticData(true);
-      setError('Using offline Sri Lankan packages. To get live data, ensure backend is running on port 5000.');
+        setPackages(popularPackages);
+        setUsingStaticData(true);
+        setError('Using offline Sri Lankan packages. To get live data, ensure backend is running on port 5000.');
     } finally {
       setLoading(false);
     }
@@ -113,10 +115,10 @@ const Packages = () => {
         }
       }
       
-      // Price filter
-      if (filter === 'budget') return pkg.price < 1000;
-      if (filter === 'mid-range') return pkg.price >= 1000 && pkg.price < 2000;
-      if (filter === 'luxury') return pkg.price >= 2000;
+      // Price filter (adjusted for Rs. 4000-50,000 range)
+      if (filter === 'budget') return pkg.price < 20000;
+      if (filter === 'mid-range') return pkg.price >= 20000 && pkg.price < 35000;
+      if (filter === 'luxury') return pkg.price >= 35000;
       
       // Duration filter
       if (filter === 'short') return pkg.duration_days <= 5;
@@ -231,9 +233,9 @@ const Packages = () => {
                 >
                   <option value="all">All Categories</option>
                   <optgroup label="By Price">
-                    <option value="budget">Budget (Under $1,000)</option>
-                    <option value="mid-range">Mid-range ($1,000 - $2,000)</option>
-                    <option value="luxury">Luxury ($2,000+)</option>
+                    <option value="budget">Budget (Under Rs. 20,000)</option>
+                    <option value="mid-range">Mid-range (Rs. 20,000 - Rs. 35,000)</option>
+                    <option value="luxury">Luxury (Rs. 35,000+)</option>
                   </optgroup>
                   <optgroup label="By Duration">
                     <option value="short">Short Trips (≤5 days)</option>

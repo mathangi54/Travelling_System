@@ -27,7 +27,7 @@ const AdminGuideRequests = () => {
 
       const response = await fetch(`${API_BASE_URL}/guide-requests?${params}`);
       const data = await response.json();
-
+      
       if (data.status === 'success') {
         setRequests(data.data);
       }
@@ -47,7 +47,6 @@ const AdminGuideRequests = () => {
         },
         body: JSON.stringify({ status: newStatus })
       });
-
       const data = await response.json();
       
       if (data.status === 'success') {
@@ -78,6 +77,20 @@ const AdminGuideRequests = () => {
       hour: '2-digit',
       minute: '2-digit'
     });
+  };
+
+  // Enhanced language display function - only Tamil, English, Sinhala
+  const formatLanguages = (languages) => {
+    if (!languages) return 'English';
+    
+    const langArray = Array.isArray(languages) ? languages : JSON.parse(languages || '["English"]');
+    
+    // Filter to only show Tamil, English, Sinhala
+    const validLanguages = langArray.filter(lang => 
+      ['Tamil', 'English', 'Sinhala'].includes(lang)
+    );
+    
+    return validLanguages.length > 0 ? validLanguages.join(', ') : 'English';
   };
 
   const RequestDetailsModal = ({ request, onClose }) => (
@@ -144,6 +157,12 @@ const AdminGuideRequests = () => {
                 <label className="text-sm font-medium text-gray-600">Guide Phone</label>
                 <p className="text-gray-900">{request.guide_phone}</p>
               </div>
+              {request.guide_languages && (
+                <div className="md:col-span-3">
+                  <label className="text-sm font-medium text-gray-600">Languages</label>
+                  <p className="text-gray-900">{formatLanguages(request.guide_languages)}</p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -326,7 +345,6 @@ const AdminGuideRequests = () => {
               Requests ({requests.length})
             </h2>
           </div>
-
           {loading ? (
             <div className="p-8 text-center">
               <div className="animate-spin h-8 w-8 border-4 border-indigo-500 border-t-transparent rounded-full mx-auto"></div>
@@ -386,6 +404,11 @@ const AdminGuideRequests = () => {
                         <div className="text-sm font-medium text-gray-900">
                           {request.guide_name}
                         </div>
+                        {request.guide_languages && (
+                          <div className="text-xs text-gray-500">
+                            {formatLanguages(request.guide_languages)}
+                          </div>
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${

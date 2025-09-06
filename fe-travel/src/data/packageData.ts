@@ -1,7 +1,7 @@
 export const popularPackages = [
   {
     id: 1,
-    image_url: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=300&fit=crop",
+    image_url: "/images/mirrisa1.jpg",
     name: "Pristine Beaches of Mirissa",
     description: "Experience whale watching and pristine beaches in southern Sri Lanka with beachfront villa stay and stilt fishing experiences",
     location: "Mirissa, Southern Province",
@@ -23,7 +23,7 @@ export const popularPackages = [
   },
   {
     id: 2,
-    image_url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+    image_url: "/images/misty_ella1.jpg",
     name: "Misty Mountains of Ella",
     description: "Discover tea plantations, Nine Arch Bridge, Little Adams Peak, and traditional tea factory tours in the hill country",
     location: "Ella, Uva Province",
@@ -44,7 +44,7 @@ export const popularPackages = [
   },
   {
     id: 3,
-    image_url: "https://images.unsplash.com/photo-1539650116574-75c0c6d0ec5c?w=400&h=300&fit=crop",
+    image_url: "/images/anu.jpg",
     name: "Cultural Triangle Explorer",
     description: "Explore ancient cities of Sigiriya Rock Fortress, Anuradhapura sacred city, and Polonnaruwa medieval capital",
     location: "Cultural Triangle",
@@ -66,7 +66,7 @@ export const popularPackages = [
   },
   {
     id: 4,
-    image_url: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=300&fit=crop",
+    image_url: "/images/unawatuna1.webp",
     name: "Tropical Paradise Unawatuna",
     description: "Palm-fringed beaches, coral reef snorkeling, sunset catamaran cruises, and beachfront relaxation",
     location: "Unawatuna, Southern Province",
@@ -87,7 +87,7 @@ export const popularPackages = [
   },
   {
     id: 5,
-    image_url: "https://images.unsplash.com/photo-1549366021-9f761d040a94?w=400&h=300&fit=crop",
+    image_url: "/images/safari.jpg",
     name: "Wildlife Safari Adventure",
     description: "Leopard spotting in Yala National Park with luxury safari camping, elephant orphanage, and bird watching tours",
     location: "Yala National Park",
@@ -108,7 +108,7 @@ export const popularPackages = [
   },
   {
     id: 6,
-    image_url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+    image_url: "/images/tea.jpg",
     name: "Tea Country Experience",
     description: "Explore Nuwara Eliya tea plantations, Horton Plains World's End, cool mountain climate, and colonial heritage hotels",
     location: "Nuwara Eliya, Central Province",
@@ -130,7 +130,7 @@ export const popularPackages = [
   },
   {
     id: 7,
-    image_url: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=300&fit=crop",
+    image_url: "/images/arugam1.webp",
     name: "Golden Beaches of Arugam Bay",
     description: "World-class surfing destination with beach bungalow accommodation, Kumana Bird Sanctuary, and fresh seafood dining",
     location: "Arugam Bay, Eastern Province",
@@ -151,7 +151,7 @@ export const popularPackages = [
   },
   {
     id: 8,
-    image_url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+    image_url: "/images/fort1.webp",
     name: "Sacred City of Kandy",
     description: "Visit Temple of the Tooth Relic, Royal Botanical Gardens, traditional Kandyan dance, and Lake Kandy boat rides",
     location: "Kandy, Central Province",
@@ -173,7 +173,7 @@ export const popularPackages = [
   },
   {
     id: 9,
-    image_url: "https://images.unsplash.com/photo-1539650116574-75c0c6d0ec5c?w=400&h=300&fit=crop",
+    image_url: "/images/fort1.webp",
     name: "Ancient Fortress of Jaffna",
     description: "Explore rich Tamil culture, historic Jaffna Fort, Nallur Temple heritage, and island hopping tours",
     location: "Jaffna, Northern Province",
@@ -194,7 +194,7 @@ export const popularPackages = [
   },
   {
     id: 10,
-    image_url: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=400&h=300&fit=crop",
+    image_url: "/images/trinco.webp",
     name: "Pristine Trincomalee",
     description: "Beautiful Nilaveli Beach, ancient Koneswaram Temple, whale watching cruises, and hot springs experience",
     location: "Trincomalee, Eastern Province",
@@ -216,7 +216,7 @@ export const popularPackages = [
   },
   {
     id: 11,
-    image_url: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+    image_url: "/images/galle.jpg",
     name: "Galle Dutch Fort Heritage",
     description: "UNESCO World Heritage colonial fort with cobblestone streets, rampart walks, and ocean views",
     location: "Galle, Southern Province",

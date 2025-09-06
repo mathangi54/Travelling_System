@@ -416,7 +416,7 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
             if cur:
                 close_db_cursor(cur)
 
-    # Seed guides data
+    # Seed guides data - CENTRALIZED GUIDE DATA with UNIQUE images
     @app.route('/api/seed-guides', methods=['GET'])
     def seed_guides():
         cur = None
@@ -427,7 +427,7 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
             cur.execute("DELETE FROM guides")
             logger.info("Cleared existing guides")
             
-            # Insert Sri Lankan guides
+            # CENTRALIZED Sri Lankan guides data with UNIQUE image paths
             guides_data = [
                 {
                     'name': 'Chaminda Perera',
@@ -435,55 +435,55 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
                     'experience': '12 years',
                     'rating': 4.9,
                     'languages': ['English', 'Sinhala', 'Tamil'],
-                    'image_url': 'https://images.unsplash.com/photo-1535077761702-4934a0669af9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                    'image_url': '/images/guide1.webp',
                     'bio': 'Born in Kandy, expert in Buddhist history and UNESCO World Heritage sites. Specializes in Cultural Triangle tours.',
                     'tours_completed': 485,
                     'specialities': ['Sigiriya & Dambulla', 'Kandy Temple Tours', 'Ancient Kingdoms'],
                     'phone': '+94 77 123 4567',
                     'email': 'chaminda@srilankaguides.com',
-                    'price_range': '$50-80/day'
+                    'price_range': 'Rs. 4,000-8,000/day'
                 },
                 {
                     'name': 'Nimal Fernando',
                     'specialty': 'Wildlife & Nature Tours',
                     'experience': '15 years',
                     'rating': 4.95,
-                    'languages': ['English', 'Sinhala', 'German'],
-                    'image_url': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+                    'languages': ['English', 'Sinhala'],
+                    'image_url': '/images/guide7.jpg',
                     'bio': 'Wildlife biologist and safari guide with deep knowledge of Yala, Udawalawe and leopard behavior patterns.',
                     'tours_completed': 520,
                     'specialities': ['Leopard Safaris', 'Elephant Watching', 'Bird Photography'],
                     'phone': '+94 71 987 6543',
                     'email': 'nimal@wildlifeguides.lk',
-                    'price_range': '$60-90/day'
+                    'price_range': 'Rs. 4,000-8,000/day'
                 },
                 {
                     'name': 'Priya Wickramasinghe',
                     'specialty': 'Tea Country & Hill Station Tours',
                     'experience': '8 years',
                     'rating': 4.88,
-                    'languages': ['English', 'Sinhala', 'French'],
-                    'image_url': 'https://images.unsplash.com/photo-1601412436009-d964bd02edbc?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                    'languages': ['English', 'Sinhala'],
+                    'image_url': '/images/guide12.webp',
                     'bio': 'Tea plantation heritage expert from Nuwara Eliya, specializing in Ceylon tea history and hill country adventures.',
                     'tours_completed': 320,
                     'specialities': ['Tea Factory Tours', 'Ella & Nine Arches', 'Mountain Trekking'],
                     'phone': '+94 76 555 2468',
                     'email': 'priya@teacountryguides.com',
-                    'price_range': '$45-70/day'
+                    'price_range': 'Rs. 4,000-8,000/day'
                 },
                 {
                     'name': 'Ruwan Jayasuriya',
                     'specialty': 'Coastal & Adventure Tours',
                     'experience': '10 years',
                     'rating': 4.92,
-                    'languages': ['English', 'Sinhala', 'Japanese'],
-                    'image_url': 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                    'languages': ['English', 'Sinhala', 'Tamil'],
+                    'image_url': '/images/guide14.webp',
                     'bio': 'Certified diving instructor and marine conservation advocate. Expert in southern coast attractions and whale watching.',
                     'tours_completed': 410,
                     'specialities': ['Whale Watching', 'Surfing Lessons', 'Coastal Heritage'],
                     'phone': '+94 75 333 7890',
                     'email': 'ruwan@coastalguides.lk',
-                    'price_range': '$55-85/day'
+                    'price_range': 'Rs. 4,000-8,000/day'
                 },
                 {
                     'name': 'Kumari Silva',
@@ -491,27 +491,27 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
                     'experience': '6 years',
                     'rating': 4.87,
                     'languages': ['English', 'Sinhala', 'Tamil'],
-                    'image_url': 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
+                    'image_url': '/images/guide5.webp',
                     'bio': 'Traditional Sri Lankan chef and cultural ambassador. Offers authentic village experiences and cooking classes.',
                     'tours_completed': 285,
                     'specialities': ['Spice Garden Tours', 'Traditional Cooking', 'Village Experiences'],
                     'phone': '+94 78 444 1357',
                     'email': 'kumari@culinaryguides.com',
-                    'price_range': '$40-65/day'
+                    'price_range': 'Rs. 4,000-8,000/day'
                 },
                 {
                     'name': 'Mahinda Rathnayake',
                     'specialty': 'Adventure & Pilgrimage Tours',
                     'experience': '14 years',
                     'rating': 4.91,
-                    'languages': ['English', 'Sinhala', 'Hindi'],
-                    'image_url': 'https://images.unsplash.com/photo-1517308883849-ceac3c24681e?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                    'languages': ['English', 'Sinhala'],
+                    'image_url': '/images/guide6.jpg',
                     'bio': 'Mountain guide and meditation practitioner. Specializes in Adam\'s Peak pilgrimages and spiritual journeys.',
                     'tours_completed': 465,
                     'specialities': ['Adam\'s Peak Climb', 'Meditation Retreats', 'Sacred Sites'],
                     'phone': '+94 77 666 9012',
                     'email': 'mahinda@pilgrimguides.lk',
-                    'price_range': '$50-75/day'
+                    'price_range': 'Rs. 4,000-8,000/day'
                 }
             ]
             
@@ -547,7 +547,7 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
             
             return jsonify({
                 "status": "success",
-                "message": f"Sri Lankan guides seeded successfully! Added {count} professional guides.",
+                "message": f"Sri Lankan guides seeded successfully! Added {count} professional guides with English, Tamil, and Sinhala language support.",
                 "guides_added": count
             })
             
