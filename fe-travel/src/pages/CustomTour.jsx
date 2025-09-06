@@ -1,5 +1,158 @@
 import React, { useState } from 'react';
-import { sriLankaDestinations } from '../data/destinationsData';
+
+// Destinations data
+const sriLankaDestinations = [
+  {
+    id: 1,
+    name: "Sigiriya Rock Fortress",
+    region: "Cultural Triangle",
+    type: "Cultural Heritage",
+    bestTime: "Dec-Mar",
+    description: "Ancient rock fortress and palace ruins with stunning frescoes and gardens. UNESCO World Heritage site.",
+    highlights: ["Lion Rock", "Ancient Frescoes", "Water Gardens", "Mirror Wall"],
+    image: "/images/sigiriya.jpeg"
+  },
+  {
+    id: 2,
+    name: "Ella Rock & Nine Arch Bridge",
+    region: "Hill Country",
+    type: "Nature & Adventure",
+    bestTime: "Jan-Mar, Jul-Sep",
+    description: "Scenic hill station with tea plantations, hiking trails, and the famous Nine Arch Bridge.",
+    highlights: ["Ella Rock Hike", "Nine Arch Bridge", "Tea Plantations", "Little Adam's Peak"],
+    image: "/images/ella.webp"
+  },
+  {
+    id: 3,
+    name: "Mirissa Beach",
+    region: "Southern Coast",
+    type: "Beach & Marine",
+    bestTime: "Dec-Apr",
+    description: "Pristine beach perfect for whale watching, surfing, and relaxation with palm-fringed shores.",
+    highlights: ["Whale Watching", "Surfing", "Stilt Fishing", "Beach Relaxation"],
+    image: "/images/mirrisa1.jpg"
+  },
+  {
+    id: 4,
+    name: "Kandy Temple of the Tooth",
+    region: "Central Province",
+    type: "Cultural & Religious",
+    bestTime: "Dec-Apr",
+    description: "Sacred Buddhist temple housing the tooth relic of Buddha, surrounded by beautiful lake and gardens.",
+    highlights: ["Temple of the Tooth", "Kandy Lake", "Royal Botanical Gardens", "Cultural Shows"],
+    image: "/images/tooth.jpeg"
+  },
+  {
+    id: 5,
+    name: "Yala National Park",
+    region: "Southern Province",
+    type: "Wildlife Safari",
+    bestTime: "Feb-Jul",
+    description: "Sri Lanka's most visited national park, famous for leopards, elephants, and diverse wildlife.",
+    highlights: ["Leopard Spotting", "Elephant Herds", "Bird Watching", "Safari Camping"],
+    image: "/images/yala.webp"
+  },
+  {
+    id: 6,
+    name: "Nuwara Eliya Tea Country",
+    region: "Central Highlands",
+    type: "Hill Station",
+    bestTime: "Jan-Mar, Jul-Sep",
+    description: "Cool climate hill station known as 'Little England' with tea plantations and colonial architecture.",
+    highlights: ["Tea Factories", "Horton Plains", "Gregory Lake", "Cool Climate"],
+    image: "/images/nuw.jpg"
+  },
+  {
+    id: 7,
+    name: "Galle Dutch Fort",
+    region: "Southern Coast",
+    type: "Colonial Heritage",
+    bestTime: "Dec-Apr",
+    description: "UNESCO World Heritage fortified city built by Dutch colonials with cobblestone streets and ramparts.",
+    highlights: ["Historic Fort", "Lighthouse", "Dutch Architecture", "Art Galleries"],
+    image: "/images/galle1.webp"
+  },
+  {
+    id: 8,
+    name: "Arugam Bay",
+    region: "Eastern Coast",
+    type: "Surfing & Beach",
+    bestTime: "Apr-Oct",
+    description: "World-renowned surfing destination with consistent waves and laid-back beach town atmosphere.",
+    highlights: ["World-Class Surfing", "Beach Bars", "Kumana National Park", "Seafood"],
+    image: "/images/arugam1.webp"
+  },
+  {
+    id: 9,
+    name: "Anuradhapura Ancient City",
+    region: "North Central",
+    type: "Ancient Heritage",
+    bestTime: "Dec-Mar",
+    description: "Ancient capital city with magnificent dagobas, monasteries, and the sacred Bodhi Tree.",
+    highlights: ["Sacred Bodhi Tree", "Ancient Dagobas", "Ruins & Monasteries", "Archaeological Sites"],
+    image: "/images/anu.jpg"
+  },
+  {
+    id: 10,
+    name: "Trincomalee",
+    region: "Eastern Coast",
+    type: "Beach & Culture",
+    bestTime: "Apr-Oct",
+    description: "Historic port city with beautiful beaches, ancient temples, and whale watching opportunities.",
+    highlights: ["Nilaveli Beach", "Koneswaram Temple", "Whale Watching", "Hot Springs"],
+    image: "/images/trinco.webp"
+  },
+  {
+    id: 11,
+    name: "Jaffna Peninsula",
+    region: "Northern Province",
+    type: "Cultural Heritage",
+    bestTime: "Oct-Mar",
+    description: "Rich Tamil cultural heritage with historic fort, temples, and unique island experiences.",
+    highlights: ["Jaffna Fort", "Nallur Temple", "Island Hopping", "Tamil Culture"],
+    image: "/images/fort.jpg"
+  },
+  {
+    id: 12,
+    name: "Sinharaja Rainforest",
+    region: "Sabaragamuwa Province",
+    type: "Biodiversity Hotspot",
+    bestTime: "Jan-Apr, Aug-Sep",
+    description: "UNESCO World Heritage rainforest with endemic species and guided nature treks.",
+    highlights: ["Endemic Wildlife", "Bird Watching", "Nature Treks", "Biodiversity"],
+    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 13,
+    name: "Polonnaruwa Ancient City",
+    region: "North Central",
+    type: "Archaeological Site",
+    bestTime: "Dec-Mar",
+    description: "Medieval capital with well-preserved ruins, Buddha statues, and ancient irrigation systems.",
+    highlights: ["Gal Vihara", "Ancient Ruins", "Royal Palace", "Parakrama Samudra"],
+    image: "/images/pola.webp"
+  },
+  {
+    id: 14,
+    name: "Unawatuna Bay",
+    region: "Southern Coast",
+    type: "Beach Paradise",
+    bestTime: "Dec-Apr",
+    description: "Crescent-shaped beach with coral reefs, perfect for swimming, snorkeling, and relaxation.",
+    highlights: ["Coral Reef", "Snorkeling", "Beach Relaxation", "Sunset Views"],
+    image: "/images/unawatuna1.webp"
+  },
+  {
+    id: 15,
+    name: "Dambulla Cave Temple",
+    region: "Central Province",
+    type: "Religious Heritage",
+    bestTime: "Dec-Mar",
+    description: "Ancient cave temple complex with Buddha statues and beautiful ceiling paintings.",
+    highlights: ["Cave Temples", "Ancient Art", "Buddha Statues", "Religious Significance"],
+    image: "/images/dambulla.jpg"
+  }
+];
 
 const CustomTour = () => {
   const [selectedDestinations, setSelectedDestinations] = useState([]);
@@ -31,15 +184,34 @@ const CustomTour = () => {
   );
 
   const calculateEstimatedCost = () => {
-    const baseCost = selectedDestinations.length * 50;
-    const durationCost = duration * 30;
+    // Base cost per destination (Rs 400-600)
+    const baseCost = selectedDestinations.length * 500;
+    
+    // Duration cost (Rs 300-500 per day)
+    const durationCost = duration * 400;
+    
+    // Budget multipliers to keep within Rs 4000-10000 range
     let budgetMultiplier = 1;
     
-    if (budget === 'low') budgetMultiplier = 0.7;
-    if (budget === 'high') budgetMultiplier = 1.5;
-    if (budget === 'luxury') budgetMultiplier = 2.5;
+    if (budget === 'low') budgetMultiplier = 0.8;
+    if (budget === 'medium') budgetMultiplier = 1.0;
+    if (budget === 'high') budgetMultiplier = 1.3;
+    if (budget === 'luxury') budgetMultiplier = 1.6;
     
-    return Math.round((baseCost + durationCost) * budgetMultiplier);
+    // Calculate base total
+    let totalCost = (baseCost + durationCost) * budgetMultiplier;
+    
+    // Ensure the cost stays within Rs 4000-10000 range
+    const minCost = 4000;
+    const maxCost = 10000;
+    
+    if (totalCost < minCost) {
+      totalCost = minCost + (selectedDestinations.length * 200) + (duration * 100);
+    } else if (totalCost > maxCost) {
+      totalCost = maxCost - (Math.random() * 1000);
+    }
+    
+    return Math.round(totalCost);
   };
 
   const handleInputChange = (e) => {
@@ -162,7 +334,8 @@ const CustomTour = () => {
                       <strong>Budget Level:</strong> {budget.charAt(0).toUpperCase() + budget.slice(1)}
                     </p>
                     <p className="text-sm text-gray-600">
-                      <strong>Estimated Cost:</strong> ${calculateEstimatedCost()} per person
+                      <strong>Estimated Cost:</strong> Rs {calculateEstimatedCost().toLocaleString()}
+                      <span className="text-sm font-normal text-gray-600 ml-1">per person</span>
                     </p>
                   </div>
 
@@ -400,7 +573,7 @@ const CustomTour = () => {
                 <div className="bg-indigo-50 p-4 rounded-lg mb-6">
                   <h3 className="text-lg font-medium text-indigo-800 mb-2">Estimated Cost</h3>
                   <p className="text-3xl font-bold text-indigo-600">
-                    ${calculateEstimatedCost()}
+                    Rs {calculateEstimatedCost().toLocaleString()}
                     <span className="text-sm font-normal text-gray-600 ml-1">per person</span>
                   </p>
                   <p className="text-xs text-gray-500 mt-1">

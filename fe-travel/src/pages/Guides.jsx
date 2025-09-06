@@ -29,7 +29,7 @@ const Guides = () => {
     tour_type: ''
   });
 
-  // Static fallback data - comprehensive Sri Lankan guides
+  // Static fallback data - comprehensive Sri Lankan guides with UNIQUE images
   const getStaticGuides = () => [
     {
       id: 1,
@@ -38,13 +38,13 @@ const Guides = () => {
       experience: '12 years',
       rating: 4.9,
       languages: ['English', 'Sinhala', 'Tamil'],
-      image_url: 'https://images.unsplash.com/photo-1535077761702-4934a0669af9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      bio: 'Born in Kandy, expert in Buddhist history and UNESCO World Heritage sites. Specializes in Cultural Triangle tours including Sigiriya, Dambulla, and Anuradhapura.',
+      image_url: '/images/guide1.jpg',
+      bio: 'Born in Kandy, expert in Buddhist history and UNESCO World Heritage sites. Specializes in Cultural Triangle tours.',
       tours_completed: 485,
-      specialities: ['Sigiriya & Dambulla', 'Kandy Temple Tours', 'Ancient Kingdoms', 'UNESCO Sites'],
+      specialities: ['Sigiriya & Dambulla', 'Kandy Temple Tours', 'Ancient Kingdoms'],
       phone: '+94 77 123 4567',
       email: 'chaminda@srilankaguides.com',
-      price_range: '$50-80/day'
+      price_range: 'Rs. 4,000-8,000/day'
     },
     {
       id: 2,
@@ -52,14 +52,14 @@ const Guides = () => {
       specialty: 'Wildlife & Nature Tours',
       experience: '15 years',
       rating: 4.95,
-      languages: ['English', 'Sinhala', 'German'],
-      image_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-      bio: 'Wildlife biologist and safari guide with deep knowledge of Yala, Udawalawe and leopard behavior patterns. Expert in bird watching and conservation.',
+      languages: ['English', 'Sinhala'],
+      image_url: '/images/guide2.jpg',
+      bio: 'Wildlife biologist and safari guide with deep knowledge of Yala, Udawalawe and leopard behavior patterns.',
       tours_completed: 520,
-      specialities: ['Leopard Safaris', 'Elephant Watching', 'Bird Photography', 'Conservation Tours'],
+      specialities: ['Leopard Safaris', 'Elephant Watching', 'Bird Photography'],
       phone: '+94 71 987 6543',
       email: 'nimal@wildlifeguides.lk',
-      price_range: '$60-90/day'
+      price_range: 'Rs. 4,000-8,000/day'
     },
     {
       id: 3,
@@ -67,14 +67,14 @@ const Guides = () => {
       specialty: 'Tea Country & Hill Station Tours',
       experience: '8 years',
       rating: 4.88,
-      languages: ['English', 'Sinhala', 'French'],
-      image_url: 'https://images.unsplash.com/photo-1601412436009-d964bd02edbc?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      bio: 'Tea plantation heritage expert from Nuwara Eliya, specializing in Ceylon tea history and hill country adventures. Third-generation tea planter family.',
+      languages: ['English', 'Sinhala'],
+      image_url: '/images/guide3.jpg',
+      bio: 'Tea plantation heritage expert from Nuwara Eliya, specializing in Ceylon tea history and hill country adventures.',
       tours_completed: 320,
-      specialities: ['Tea Factory Tours', 'Ella & Nine Arches', 'Mountain Trekking', 'Colonial Heritage'],
+      specialities: ['Tea Factory Tours', 'Ella & Nine Arches', 'Mountain Trekking'],
       phone: '+94 76 555 2468',
       email: 'priya@teacountryguides.com',
-      price_range: '$45-70/day'
+      price_range: 'Rs. 4,000-8,000/day'
     },
     {
       id: 4,
@@ -82,14 +82,14 @@ const Guides = () => {
       specialty: 'Coastal & Adventure Tours',
       experience: '10 years',
       rating: 4.92,
-      languages: ['English', 'Sinhala', 'Japanese'],
-      image_url: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      bio: 'Certified diving instructor and marine conservation advocate. Expert in southern coast attractions and whale watching. PADI certified with marine biology background.',
+      languages: ['English', 'Sinhala', 'Tamil'],
+      image_url: '/images/guide4.jpg',
+      bio: 'Certified diving instructor and marine conservation advocate. Expert in southern coast attractions and whale watching.',
       tours_completed: 410,
-      specialities: ['Whale Watching', 'Surfing Lessons', 'Coastal Heritage', 'Marine Conservation'],
+      specialities: ['Whale Watching', 'Surfing Lessons', 'Coastal Heritage'],
       phone: '+94 75 333 7890',
       email: 'ruwan@coastalguides.lk',
-      price_range: '$55-85/day'
+      price_range: 'Rs. 4,000-8,000/day'
     },
     {
       id: 5,
@@ -98,13 +98,13 @@ const Guides = () => {
       experience: '6 years',
       rating: 4.87,
       languages: ['English', 'Sinhala', 'Tamil'],
-      image_url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-      bio: 'Traditional Sri Lankan chef and cultural ambassador. Offers authentic village experiences and cooking classes. Expert in regional cuisines from all provinces.',
+      image_url: '/images/guide5.jpg',
+      bio: 'Traditional Sri Lankan chef and cultural ambassador. Offers authentic village experiences and cooking classes.',
       tours_completed: 285,
-      specialities: ['Spice Garden Tours', 'Traditional Cooking', 'Village Experiences', 'Local Markets'],
+      specialities: ['Spice Garden Tours', 'Traditional Cooking', 'Village Experiences'],
       phone: '+94 78 444 1357',
       email: 'kumari@culinaryguides.com',
-      price_range: '$40-65/day'
+      price_range: 'Rs. 4,000-8,000/day'
     },
     {
       id: 6,
@@ -112,16 +112,39 @@ const Guides = () => {
       specialty: 'Adventure & Pilgrimage Tours',
       experience: '14 years',
       rating: 4.91,
-      languages: ['English', 'Sinhala', 'Hindi'],
-      image_url: 'https://images.unsplash.com/photo-1517308883849-ceac3c24681e?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      bio: 'Mountain guide and meditation practitioner. Specializes in Adam\'s Peak pilgrimages and spiritual journeys. Licensed mountain climbing instructor.',
+      languages: ['English', 'Sinhala'],
+      image_url: '/images/guide6.jpg',
+      bio: 'Mountain guide and meditation practitioner. Specializes in Adam\'s Peak pilgrimages and spiritual journeys.',
       tours_completed: 465,
-      specialities: ['Adam\'s Peak Climb', 'Meditation Retreats', 'Sacred Sites', 'Mountain Adventures'],
+      specialities: ['Adam\'s Peak Climb', 'Meditation Retreats', 'Sacred Sites'],
       phone: '+94 77 666 9012',
       email: 'mahinda@pilgrimguides.lk',
-      price_range: '$50-75/day'
+      price_range: 'Rs. 4,000-8,000/day'
     }
   ];
+
+  // Enhanced function to normalize and filter languages - only Tamil, English, Sinhala
+  const normalizeLanguages = (languages) => {
+    if (!languages) return ['English'];
+    
+    let langArray = [];
+    if (Array.isArray(languages)) {
+      langArray = languages;
+    } else {
+      try {
+        langArray = JSON.parse(languages);
+      } catch {
+        langArray = [languages];
+      }
+    }
+    
+    // Valid Sri Lankan languages only - Tamil, English, Sinhala
+    const validLanguages = ['Tamil', 'English', 'Sinhala'];
+    const filteredLanguages = langArray.filter(lang => validLanguages.includes(lang));
+    
+    // Return filtered languages or default to English if none valid
+    return filteredLanguages.length > 0 ? filteredLanguages : ['English'];
+  };
 
   // Enhanced API connectivity test with detailed diagnostics
   const testApiConnectivity = async () => {
@@ -255,7 +278,7 @@ const Guides = () => {
     }
   };
 
-  // Enhanced fetch guides with comprehensive error handling
+  // Enhanced fetch guides with comprehensive error handling and language filtering
   const fetchGuides = async () => {
     try {
       setLoading(true);
@@ -297,14 +320,24 @@ const Guides = () => {
           const retryData = await retryResponse.json();
           
           if (retryData.status === 'success' && retryData.data.length > 0) {
-            setGuides(retryData.data);
-            console.log('Guides loaded after seeding:', retryData.data.length);
+            // Normalize languages for all guides from API
+            const guidesWithNormalizedLanguages = retryData.data.map(guide => ({
+              ...guide,
+              languages: normalizeLanguages(guide.languages)
+            }));
+            setGuides(guidesWithNormalizedLanguages);
+            console.log('Guides loaded after seeding:', guidesWithNormalizedLanguages.length);
           } else {
             throw new Error('Unable to load or seed guides data');
           }
         } else {
-          setGuides(data.data);
-          console.log('Guides loaded successfully:', data.data.length);
+          // Normalize languages for all guides from API
+          const guidesWithNormalizedLanguages = data.data.map(guide => ({
+            ...guide,
+            languages: normalizeLanguages(guide.languages)
+          }));
+          setGuides(guidesWithNormalizedLanguages);
+          console.log('Guides loaded successfully:', guidesWithNormalizedLanguages.length);
         }
       } else {
         throw new Error(data.message || 'Invalid response format');
@@ -314,8 +347,11 @@ const Guides = () => {
       console.error('Error in fetchGuides:', err);
       setError(err.message);
       
-      // Always show static guides as fallback
-      const staticGuides = getStaticGuides();
+      // Always show static guides as fallback with normalized languages
+      const staticGuides = getStaticGuides().map(guide => ({
+        ...guide,
+        languages: normalizeLanguages(guide.languages)
+      }));
       setGuides(staticGuides);
       console.log('Using static fallback guides:', staticGuides.length);
       
@@ -481,6 +517,12 @@ const Guides = () => {
     }
   };
 
+  // Enhanced function to display languages (only Tamil, English, Sinhala)
+  const displayLanguages = (languages) => {
+    const normalizedLangs = normalizeLanguages(languages);
+    return normalizedLangs.join(', ');
+  };
+
   // Loading state
   if (loading) {
     return (
@@ -506,8 +548,6 @@ const Guides = () => {
             Local experts passionate about sharing Sri Lanka's rich heritage, stunning nature, and warm hospitality.
           </p>
         </div>
-
-        {/* REMOVED: Connection Status Banner - No longer displayed */}
 
         {/* Error Banner - Only show if there's a real error */}
         {error && connectionStatus === 'failed' && (
@@ -594,10 +634,10 @@ const Guides = () => {
                   </div>
                 )}
 
-                {/* Languages */}
+                {/* Languages - Enhanced with language filtering */}
                 <div className="mb-4">
                   <div className="flex flex-wrap gap-1">
-                    {(Array.isArray(guide.languages) ? guide.languages : JSON.parse(guide.languages || '[]')).map((language, index) => (
+                    {normalizeLanguages(guide.languages).map((language, index) => (
                       <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
                         {language}
                       </span>
@@ -681,12 +721,12 @@ const Guides = () => {
             <div className="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-lg transition-shadow">
               <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Flexible & Personal</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Multilingual Guides</h3>
               <p className="text-gray-600 text-sm">
-                Customizable itineraries and personal attention to your interests.
+                Communicate in Tamil, English, and Sinhala for authentic local experiences.
               </p>
             </div>
           </div>
@@ -719,6 +759,9 @@ const Guides = () => {
                   {modalType === 'book' ? 'Book Tour with' : 'Contact'} {selectedGuide.name}
                 </h2>
                 <p className="text-sm text-gray-600">{selectedGuide.specialty}</p>
+                <p className="text-xs text-gray-500">
+                  Languages: {displayLanguages(selectedGuide.languages)}
+                </p>
               </div>
               <button
                 onClick={handleCloseModal}

@@ -1,11 +1,9 @@
-import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PackageCard from './PackageCard';
 import { popularPackages } from '../data/packageData';
 
 const PopularPackages = () => {
   const navigate = useNavigate();
-  const sliderRef = useRef(null);
 
   const handleViewMore = () => {
     navigate('/packages');
