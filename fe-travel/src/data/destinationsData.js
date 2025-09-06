@@ -8,7 +8,7 @@ export const sriLankaDestinations = [
     bestTime: "Dec-Mar",
     description: "Ancient rock fortress and palace ruins with stunning frescoes and gardens. UNESCO World Heritage site.",
     highlights: ["Lion Rock", "Ancient Frescoes", "Water Gardens", "Mirror Wall"],
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/sigiriya.jpeg"
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const sriLankaDestinations = [
     bestTime: "Jan-Mar, Jul-Sep",
     description: "Scenic hill station with tea plantations, hiking trails, and the famous Nine Arch Bridge.",
     highlights: ["Ella Rock Hike", "Nine Arch Bridge", "Tea Plantations", "Little Adam's Peak"],
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/ella.webp"
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ export const sriLankaDestinations = [
     bestTime: "Dec-Apr",
     description: "Pristine beach perfect for whale watching, surfing, and relaxation with palm-fringed shores.",
     highlights: ["Whale Watching", "Surfing", "Stilt Fishing", "Beach Relaxation"],
-    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/mirrisa1.jpg"
   },
   {
     id: 4,
@@ -38,7 +38,7 @@ export const sriLankaDestinations = [
     bestTime: "Dec-Apr",
     description: "Sacred Buddhist temple housing the tooth relic of Buddha, surrounded by beautiful lake and gardens.",
     highlights: ["Temple of the Tooth", "Kandy Lake", "Royal Botanical Gardens", "Cultural Shows"],
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/tooth.jpeg"
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ export const sriLankaDestinations = [
     bestTime: "Feb-Jul",
     description: "Sri Lanka's most visited national park, famous for leopards, elephants, and diverse wildlife.",
     highlights: ["Leopard Spotting", "Elephant Herds", "Bird Watching", "Safari Camping"],
-    image: "https://images.unsplash.com/photo-1549366021-9f761d040a94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/yala.webp"
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ export const sriLankaDestinations = [
     bestTime: "Jan-Mar, Jul-Sep",
     description: "Cool climate hill station known as 'Little England' with tea plantations and colonial architecture.",
     highlights: ["Tea Factories", "Horton Plains", "Gregory Lake", "Cool Climate"],
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/nuw.jpg"
   },
   {
     id: 7,
@@ -68,7 +68,7 @@ export const sriLankaDestinations = [
     bestTime: "Dec-Apr",
     description: "UNESCO World Heritage fortified city built by Dutch colonials with cobblestone streets and ramparts.",
     highlights: ["Historic Fort", "Lighthouse", "Dutch Architecture", "Art Galleries"],
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/galle1.webp"
   },
   {
     id: 8,
@@ -78,7 +78,7 @@ export const sriLankaDestinations = [
     bestTime: "Apr-Oct",
     description: "World-renowned surfing destination with consistent waves and laid-back beach town atmosphere.",
     highlights: ["World-Class Surfing", "Beach Bars", "Kumana National Park", "Seafood"],
-    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/arugam1.webp"
   },
   {
     id: 9,
@@ -88,7 +88,7 @@ export const sriLankaDestinations = [
     bestTime: "Dec-Mar",
     description: "Ancient capital city with magnificent dagobas, monasteries, and the sacred Bodhi Tree.",
     highlights: ["Sacred Bodhi Tree", "Ancient Dagobas", "Ruins & Monasteries", "Archaeological Sites"],
-    image: "https://images.unsplash.com/photo-1539650116574-75c0c6d0ec5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/anu.jpg"
   },
   {
     id: 10,
@@ -98,7 +98,7 @@ export const sriLankaDestinations = [
     bestTime: "Apr-Oct",
     description: "Historic port city with beautiful beaches, ancient temples, and whale watching opportunities.",
     highlights: ["Nilaveli Beach", "Koneswaram Temple", "Whale Watching", "Hot Springs"],
-    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/trinco.webp"
   },
   {
     id: 11,
@@ -108,7 +108,7 @@ export const sriLankaDestinations = [
     bestTime: "Oct-Mar",
     description: "Rich Tamil cultural heritage with historic fort, temples, and unique island experiences.",
     highlights: ["Jaffna Fort", "Nallur Temple", "Island Hopping", "Tamil Culture"],
-    image: "https://images.unsplash.com/photo-1539650116574-75c0c6d0ec5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/fort.jpg"
   },
   {
     id: 12,
@@ -128,7 +128,7 @@ export const sriLankaDestinations = [
     bestTime: "Dec-Mar",
     description: "Medieval capital with well-preserved ruins, Buddha statues, and ancient irrigation systems.",
     highlights: ["Gal Vihara", "Ancient Ruins", "Royal Palace", "Parakrama Samudra"],
-    image: "https://images.unsplash.com/photo-1539650116574-75c0c6d0ec5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/pola.webp"
   },
   {
     id: 14,
@@ -138,7 +138,7 @@ export const sriLankaDestinations = [
     bestTime: "Dec-Apr",
     description: "Crescent-shaped beach with coral reefs, perfect for swimming, snorkeling, and relaxation.",
     highlights: ["Coral Reef", "Snorkeling", "Beach Relaxation", "Sunset Views"],
-    image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/unawatuna1.webp"
   },
   {
     id: 15,
@@ -148,6 +148,6 @@ export const sriLankaDestinations = [
     bestTime: "Dec-Mar",
     description: "Ancient cave temple complex with Buddha statues and beautiful ceiling paintings.",
     highlights: ["Cave Temples", "Ancient Art", "Buddha Statues", "Religious Significance"],
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "/images/dambulla.jpg"
   }
 ];
