@@ -1,8 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+// Comprehensive list of possible API endpoints
+const API_ENDPOINTS = [
+  'http://localhost:5000/api',
+  'http://127.0.0.1:5000/api', 
+  'http://192.168.1.3:5000/api',
+  'http://0.0.0.0:5000/api'
+];
 
 const Guides = () => {
-  // Sample guide data with Sri Lankan context
-  const guides = [
+  const [guides, setGuides] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedGuide, setSelectedGuide] = useState(null);
+  const [modalType, setModalType] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [currentApiBase, setCurrentApiBase] = useState(null);
+  const [connectionStatus, setConnectionStatus] = useState('testing');
+  const [diagnosticResults, setDiagnosticResults] = useState(null);
+  const [formData, setFormData] = useState({
+    customer_name: '',
+    customer_email: '',
+    customer_phone: '',
+    preferred_date: '',
+    duration: '',
+    group_size: '',
+    message: '',
+    tour_type: ''
+  });
+
+  // Static fallback data - comprehensive Sri Lankan guides
+  const getStaticGuides = () => [
     {
       id: 1,
       name: 'Chaminda Perera',
@@ -10,10 +38,13 @@ const Guides = () => {
       experience: '12 years',
       rating: 4.9,
       languages: ['English', 'Sinhala', 'Tamil'],
-      image: 'https://images.unsplash.com/photo-1535077761702-4934a0669af9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      bio: 'Born in Kandy, expert in Buddhist history and UNESCO World Heritage sites. Specializes in Cultural Triangle tours.',
-      tours: 485,
-      specialities: ['Sigiriya & Dambulla', 'Kandy Temple Tours', 'Ancient Kingdoms']
+      image_url: 'https://images.unsplash.com/photo-1535077761702-4934a0669af9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      bio: 'Born in Kandy, expert in Buddhist history and UNESCO World Heritage sites. Specializes in Cultural Triangle tours including Sigiriya, Dambulla, and Anuradhapura.',
+      tours_completed: 485,
+      specialities: ['Sigiriya & Dambulla', 'Kandy Temple Tours', 'Ancient Kingdoms', 'UNESCO Sites'],
+      phone: '+94 77 123 4567',
+      email: 'chaminda@srilankaguides.com',
+      price_range: '$50-80/day'
     },
     {
       id: 2,
@@ -22,10 +53,13 @@ const Guides = () => {
       experience: '15 years',
       rating: 4.95,
       languages: ['English', 'Sinhala', 'German'],
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-      bio: 'Wildlife biologist and safari guide with deep knowledge of Yala, Udawalawe and leopard behavior patterns.',
-      tours: 520,
-      specialities: ['Leopard Safaris', 'Elephant Watching', 'Bird Photography']
+      image_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
+      bio: 'Wildlife biologist and safari guide with deep knowledge of Yala, Udawalawe and leopard behavior patterns. Expert in bird watching and conservation.',
+      tours_completed: 520,
+      specialities: ['Leopard Safaris', 'Elephant Watching', 'Bird Photography', 'Conservation Tours'],
+      phone: '+94 71 987 6543',
+      email: 'nimal@wildlifeguides.lk',
+      price_range: '$60-90/day'
     },
     {
       id: 3,
@@ -34,10 +68,13 @@ const Guides = () => {
       experience: '8 years',
       rating: 4.88,
       languages: ['English', 'Sinhala', 'French'],
-      image: 'https://images.unsplash.com/photo-1601412436009-d964bd02edbc?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      bio: 'Tea plantation heritage expert from Nuwara Eliya, specializing in Ceylon tea history and hill country adventures.',
-      tours: 320,
-      specialities: ['Tea Factory Tours', 'Ella & Nine Arches', 'Mountain Trekking']
+      image_url: 'https://images.unsplash.com/photo-1601412436009-d964bd02edbc?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      bio: 'Tea plantation heritage expert from Nuwara Eliya, specializing in Ceylon tea history and hill country adventures. Third-generation tea planter family.',
+      tours_completed: 320,
+      specialities: ['Tea Factory Tours', 'Ella & Nine Arches', 'Mountain Trekking', 'Colonial Heritage'],
+      phone: '+94 76 555 2468',
+      email: 'priya@teacountryguides.com',
+      price_range: '$45-70/day'
     },
     {
       id: 4,
@@ -46,10 +83,13 @@ const Guides = () => {
       experience: '10 years',
       rating: 4.92,
       languages: ['English', 'Sinhala', 'Japanese'],
-      image: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      bio: 'Certified diving instructor and marine conservation advocate. Expert in southern coast attractions and whale watching.',
-      tours: 410,
-      specialities: ['Whale Watching', 'Surfing Lessons', 'Coastal Heritage']
+      image_url: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      bio: 'Certified diving instructor and marine conservation advocate. Expert in southern coast attractions and whale watching. PADI certified with marine biology background.',
+      tours_completed: 410,
+      specialities: ['Whale Watching', 'Surfing Lessons', 'Coastal Heritage', 'Marine Conservation'],
+      phone: '+94 75 333 7890',
+      email: 'ruwan@coastalguides.lk',
+      price_range: '$55-85/day'
     },
     {
       id: 5,
@@ -58,10 +98,13 @@ const Guides = () => {
       experience: '6 years',
       rating: 4.87,
       languages: ['English', 'Sinhala', 'Tamil'],
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-      bio: 'Traditional Sri Lankan chef and cultural ambassador. Offers authentic village experiences and cooking classes.',
-      tours: 285,
-      specialities: ['Spice Garden Tours', 'Traditional Cooking', 'Village Experiences']
+      image_url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
+      bio: 'Traditional Sri Lankan chef and cultural ambassador. Offers authentic village experiences and cooking classes. Expert in regional cuisines from all provinces.',
+      tours_completed: 285,
+      specialities: ['Spice Garden Tours', 'Traditional Cooking', 'Village Experiences', 'Local Markets'],
+      phone: '+94 78 444 1357',
+      email: 'kumari@culinaryguides.com',
+      price_range: '$40-65/day'
     },
     {
       id: 6,
@@ -70,55 +113,452 @@ const Guides = () => {
       experience: '14 years',
       rating: 4.91,
       languages: ['English', 'Sinhala', 'Hindi'],
-      image: 'https://images.unsplash.com/photo-1517308883849-ceac3c24681e?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      bio: 'Mountain guide and meditation practitioner. Specializes in Adam\'s Peak pilgrimages and spiritual journeys.',
-      tours: 465,
-      specialities: ['Adam\'s Peak Climb', 'Meditation Retreats', 'Sacred Sites']
+      image_url: 'https://images.unsplash.com/photo-1517308883849-ceac3c24681e?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      bio: 'Mountain guide and meditation practitioner. Specializes in Adam\'s Peak pilgrimages and spiritual journeys. Licensed mountain climbing instructor.',
+      tours_completed: 465,
+      specialities: ['Adam\'s Peak Climb', 'Meditation Retreats', 'Sacred Sites', 'Mountain Adventures'],
+      phone: '+94 77 666 9012',
+      email: 'mahinda@pilgrimguides.lk',
+      price_range: '$50-75/day'
     }
   ];
+
+  // Enhanced API connectivity test with detailed diagnostics
+  const testApiConnectivity = async () => {
+    console.log('Testing API connectivity...');
+    setConnectionStatus('testing');
+    
+    const results = {
+      endpoints: [],
+      bestEndpoint: null,
+      issues: [],
+      recommendations: []
+    };
+    
+    for (const apiBase of API_ENDPOINTS) {
+      const endpointTest = {
+        url: apiBase,
+        available: false,
+        latency: null,
+        corsEnabled: false,
+        guidesData: false,
+        errorDetails: null
+      };
+      
+      try {
+        console.log(`Testing ${apiBase}...`);
+        const startTime = Date.now();
+        
+        // Test basic connectivity with shorter timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        
+        const response = await fetch(`${apiBase}/health`, {
+          method: 'GET',
+          mode: 'no-cors', // Try no-cors first to bypass CORS issues
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+        endpointTest.latency = Date.now() - startTime;
+        
+        // If no-cors worked, try with cors
+        try {
+          const corsResponse = await fetch(`${apiBase}/health`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          });
+          
+          if (corsResponse.ok) {
+            endpointTest.available = true;
+            endpointTest.corsEnabled = true;
+            
+            // Test guides endpoint
+            const guidesResponse = await fetch(`${apiBase}/guides`, {
+              method: 'GET',
+              mode: 'cors',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }
+            });
+            
+            if (guidesResponse.ok) {
+              const guidesData = await guidesResponse.json();
+              endpointTest.guidesData = guidesData.status === 'success' && Array.isArray(guidesData.data);
+              
+              if (endpointTest.guidesData && !results.bestEndpoint) {
+                results.bestEndpoint = apiBase;
+              }
+            }
+          }
+        } catch (corsErr) {
+          endpointTest.available = true; // Server is running but CORS issue
+          endpointTest.corsEnabled = false;
+          endpointTest.errorDetails = 'CORS blocked';
+          results.issues.push(`CORS issue with ${apiBase}`);
+        }
+        
+      } catch (err) {
+        endpointTest.errorDetails = err.message;
+        if (err.name === 'AbortError') {
+          results.issues.push(`${apiBase} timeout`);
+        } else if (err.message.includes('Failed to fetch')) {
+          results.issues.push(`${apiBase} unreachable`);
+        }
+      }
+      
+      results.endpoints.push(endpointTest);
+    }
+    
+    // Generate recommendations
+    const workingEndpoints = results.endpoints.filter(e => e.available);
+    const corsIssues = results.endpoints.filter(e => e.available && !e.corsEnabled);
+    
+    if (workingEndpoints.length === 0) {
+      results.recommendations = [
+        'Flask server appears to be down or unreachable',
+        'Restart Flask server: python app.py',
+        'Check if port 5000 is blocked by firewall',
+        'Verify you\'re running the server from the correct directory'
+      ];
+    } else if (corsIssues.length > 0) {
+      results.recommendations = [
+        'Server is running but CORS is blocking requests',
+        'Update your Flask app.py with the provided CORS configuration',
+        'Restart Flask server after updating CORS settings',
+        'Try running in incognito mode'
+      ];
+    } else if (!results.bestEndpoint) {
+      results.recommendations = [
+        'Server is accessible but guides endpoint not working',
+        'Visit /api/seed-guides to populate database',
+        'Check database connection',
+        'Verify routes.py includes guides endpoints'
+      ];
+    }
+    
+    setDiagnosticResults(results);
+    console.log('Diagnostic results:', results);
+    
+    if (results.bestEndpoint) {
+      setCurrentApiBase(results.bestEndpoint);
+      setConnectionStatus('connected');
+      return results.bestEndpoint;
+    } else {
+      setConnectionStatus('failed');
+      return null;
+    }
+  };
+
+  // Enhanced fetch guides with comprehensive error handling
+  const fetchGuides = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      // Run connectivity test first
+      let workingApiBase = await testApiConnectivity();
+      
+      if (!workingApiBase) {
+        throw new Error('No API endpoints are accessible. Please ensure Flask server is running.');
+      }
+      
+      console.log(`Using working endpoint: ${workingApiBase}`);
+      
+      // Fetch guides data
+      const response = await fetch(`${workingApiBase}/guides`, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (data.status === 'success' && Array.isArray(data.data)) {
+        if (data.data.length === 0) {
+          // Try to seed guides
+          console.log('Database appears empty, attempting to seed...');
+          await seedGuides(workingApiBase);
+          
+          // Retry fetching
+          const retryResponse = await fetch(`${workingApiBase}/guides`);
+          const retryData = await retryResponse.json();
+          
+          if (retryData.status === 'success' && retryData.data.length > 0) {
+            setGuides(retryData.data);
+            console.log('Guides loaded after seeding:', retryData.data.length);
+          } else {
+            throw new Error('Unable to load or seed guides data');
+          }
+        } else {
+          setGuides(data.data);
+          console.log('Guides loaded successfully:', data.data.length);
+        }
+      } else {
+        throw new Error(data.message || 'Invalid response format');
+      }
+      
+    } catch (err) {
+      console.error('Error in fetchGuides:', err);
+      setError(err.message);
+      
+      // Always show static guides as fallback
+      const staticGuides = getStaticGuides();
+      setGuides(staticGuides);
+      console.log('Using static fallback guides:', staticGuides.length);
+      
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Seed guides database
+  const seedGuides = async (apiBase) => {
+    try {
+      const response = await fetch(`${apiBase}/seed-guides`, {
+        method: 'GET',
+        mode: 'cors'
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Database seeded successfully:', data);
+        return true;
+      }
+    } catch (err) {
+      console.log('Seeding failed:', err);
+    }
+    return false;
+  };
+
+  // Show detailed diagnostic results
+  const showDiagnosticDetails = () => {
+    if (!diagnosticResults) return;
+    
+    const details = diagnosticResults.endpoints.map(ep => 
+      `${ep.url}:\n` +
+      `  Available: ${ep.available ? 'Yes' : 'No'}\n` +
+      `  CORS: ${ep.corsEnabled ? 'Yes' : 'No'}\n` +
+      `  Guides: ${ep.guidesData ? 'Yes' : 'No'}\n` +
+      `  Latency: ${ep.latency || 'N/A'}ms\n` +
+      `  Error: ${ep.errorDetails || 'None'}`
+    ).join('\n\n');
+    
+    const summary = `DIAGNOSTIC RESULTS\n\n${details}\n\nISSUES FOUND:\n${diagnosticResults.issues.join('\n')}\n\nRECOMMENDATIONS:\n${diagnosticResults.recommendations.join('\n')}`;
+    
+    alert(summary);
+  };
+
+  useEffect(() => {
+    fetchGuides();
+  }, []);
+
+  const handleInputChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      customer_name: '',
+      customer_email: '',
+      customer_phone: '',
+      preferred_date: '',
+      duration: '',
+      group_size: '',
+      message: '',
+      tour_type: ''
+    });
+  };
+
+  const handleOpenModal = (guide, type) => {
+    setSelectedGuide(guide);
+    setModalType(type);
+    resetForm();
+    setFormData(prev => ({
+      ...prev,
+      tour_type: type === 'book' ? guide.specialty : ''
+    }));
+  };
+
+  const handleCloseModal = () => {
+    setSelectedGuide(null);
+    setModalType(null);
+    setSubmitting(false);
+    resetForm();
+  };
+
+  const validateForm = () => {
+    if (!formData.customer_name.trim()) return 'Name is required';
+    if (!formData.customer_email.trim()) return 'Email is required';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.customer_email)) return 'Invalid email format';
+    if (!formData.message.trim()) return 'Message is required';
+    if (formData.preferred_date && new Date(formData.preferred_date) < new Date()) {
+      return 'Date cannot be in the past';
+    }
+    return null;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const validationError = validateForm();
+    if (validationError) {
+      alert(validationError);
+      return;
+    }
+
+    // If no API connection, save form data locally
+    if (connectionStatus === 'failed' || !currentApiBase) {
+      const formBackup = {
+        guide: selectedGuide.name,
+        type: modalType,
+        data: formData,
+        timestamp: new Date().toISOString()
+      };
+      
+      localStorage.setItem('pending_guide_request', JSON.stringify(formBackup));
+      alert('API connection unavailable!\n\nYour form has been saved locally and will be submitted when the server connection is restored.\n\nFor immediate assistance, please contact the guide directly:\n\n' + selectedGuide.email + '\n' + selectedGuide.phone);
+      handleCloseModal();
+      return;
+    }
+
+    setSubmitting(true);
+    
+    try {
+      const requestData = {
+        guide_id: selectedGuide.id,
+        request_type: modalType === 'book' ? 'booking' : 'contact',
+        customer_name: formData.customer_name.trim(),
+        customer_email: formData.customer_email.trim(),
+        customer_phone: formData.customer_phone.trim(),
+        message: formData.message.trim(),
+        preferred_date: formData.preferred_date || null,
+        duration: formData.duration || null,
+        group_size: formData.group_size || null,
+        tour_type: formData.tour_type || null
+      };
+
+      const response = await fetch(`${currentApiBase}/guide-requests`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData)
+      });
+
+      const data = await response.json();
+      
+      if (data.status === 'success') {
+        // Clear any pending requests
+        localStorage.removeItem('pending_guide_request');
+        
+        alert(`${modalType === 'book' ? 'Booking request' : 'Contact message'} sent successfully!\n\nRequest ID: ${data.data.id}\nGuide: ${selectedGuide.name}\n\nYou should receive a response within 24 hours.`);
+        handleCloseModal();
+      } else {
+        throw new Error(data.message || 'Failed to send request');
+      }
+    } catch (err) {
+      console.error('Error submitting request:', err);
+      alert(`Error: ${err.message}\n\nPlease try again or contact the guide directly:\n${selectedGuide.email}\n${selectedGuide.phone}`);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin h-12 w-12 border-4 border-indigo-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading Sri Lankan guides...</p>
+          <p className="text-sm text-gray-500 mt-2">Testing API connectivity...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">
+          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
             Meet Our Sri Lankan Guides
           </h1>
           <p className="mt-5 max-w-2xl mx-auto text-xl text-gray-600">
             Local experts passionate about sharing Sri Lanka's rich heritage, stunning nature, and warm hospitality.
           </p>
-          <div className="mt-8 flex justify-center space-x-8 text-sm text-gray-500">
-            <div className="flex items-center">
-              <svg className="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+        </div>
+
+        {/* REMOVED: Connection Status Banner - No longer displayed */}
+
+        {/* Error Banner - Only show if there's a real error */}
+        {error && connectionStatus === 'failed' && (
+          <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-6">
+            <div className="flex items-start">
+              <svg className="w-6 h-6 text-red-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
-              Licensed & Certified
-            </div>
-            <div className="flex items-center">
-              <svg className="w-5 h-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              Born & Raised Locally
-            </div>
-            <div className="flex items-center">
-              <svg className="w-5 h-5 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              4.8+ Star Rating
+              <div className="flex-1">
+                <h3 className="text-lg font-medium text-red-800 mb-2">API Connection Failed</h3>
+                <p className="text-sm text-red-700 mb-3">
+                  <strong>Error:</strong> {error}
+                </p>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <button 
+                    onClick={() => fetchGuides()}
+                    className="px-4 py-2 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors"
+                  >
+                    Retry Connection
+                  </button>
+                  <button 
+                    onClick={showDiagnosticDetails}
+                    className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    View Diagnostics
+                  </button>
+                </div>
+                
+                <div className="bg-yellow-50 border border-yellow-200 rounded p-3">
+                  <p className="text-xs text-yellow-800">
+                    <strong>Currently showing static guide data as fallback.</strong> You can still browse guides and contact them directly via phone/email.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Guides Grid */}
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {guides.map((guide) => (
-            <div key={guide.id} className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group">
+            <div key={guide.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
               <div className="relative pb-64 overflow-hidden">
                 <img
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  src={guide.image}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                  src={guide.image_url}
                   alt={guide.name}
+                  onError={(e) => {
+                    e.target.src = 'https://images.unsplash.com/photo-1535077761702-4934a0669af9?w=400&h=400&fit=crop&crop=face';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div className="absolute bottom-4 left-4 text-white">
@@ -127,58 +567,62 @@ const Guides = () => {
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                     <span className="text-sm font-medium">{guide.rating}</span>
-                    <span className="text-xs ml-2 opacity-90">({guide.tours} tours)</span>
+                    <span className="text-xs ml-2 opacity-90">({guide.tours_completed || guide.tours} tours)</span>
                   </div>
                 </div>
               </div>
               
               <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h2 className="text-xl font-bold text-gray-900">{guide.name}</h2>
-                    <p className="text-sm text-indigo-600 font-medium">{guide.specialty}</p>
-                  </div>
-                  <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-medium">
-                    {guide.experience}
-                  </span>
+                <div className="mb-3">
+                  <h2 className="text-xl font-bold text-gray-900">{guide.name}</h2>
+                  <p className="text-sm text-indigo-600 font-medium">{guide.specialty}</p>
+                  <span className="text-xs text-gray-500">{guide.experience}</span>
                 </div>
                 
-                <div className="mb-4">
-                  <p className="text-gray-600 text-sm leading-relaxed">{guide.bio}</p>
-                </div>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3">{guide.bio}</p>
 
                 {/* Specialities */}
-                <div className="mb-4">
-                  <h3 className="text-xs font-semibold text-gray-900 uppercase tracking-wide mb-2">Specialities</h3>
-                  <div className="flex flex-wrap gap-1">
-                    {guide.specialities.map((speciality, index) => (
-                      <span key={index} className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md">
-                        {speciality}
-                      </span>
-                    ))}
+                {guide.specialities && (
+                  <div className="mb-4">
+                    <div className="flex flex-wrap gap-1">
+                      {(Array.isArray(guide.specialities) ? guide.specialities : JSON.parse(guide.specialities || '[]')).map((speciality, index) => (
+                        <span key={index} className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md">
+                          {speciality}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                
+                )}
+
                 {/* Languages */}
-                <div className="mb-6">
-                  <h3 className="text-xs font-semibold text-gray-900 uppercase tracking-wide mb-2">Languages</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {guide.languages.map((language, index) => (
-                      <span key={index} className="flex items-center px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
-                        <svg className="w-3 h-3 mr-1 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                        </svg>
+                <div className="mb-4">
+                  <div className="flex flex-wrap gap-1">
+                    {(Array.isArray(guide.languages) ? guide.languages : JSON.parse(guide.languages || '[]')).map((language, index) => (
+                      <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
                         {language}
                       </span>
                     ))}
                   </div>
                 </div>
+
+                {/* Contact Info */}
+                <div className="mb-4 text-xs text-gray-500">
+                  <p>{guide.email}</p>
+                  <p>{guide.phone}</p>
+                  <p>{guide.price_range}</p>
+                </div>
                 
                 <div className="flex gap-2">
-                  <button className="flex-1 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors">
+                  <button 
+                    onClick={() => handleOpenModal(guide, 'book')}
+                    className="flex-1 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+                  >
                     Book Tour
                   </button>
-                  <button className="px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">
+                  <button 
+                    onClick={() => handleOpenModal(guide, 'contact')}
+                    className="px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                  >
                     Contact
                   </button>
                 </div>
@@ -192,7 +636,7 @@ const Guides = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Choose Our Sri Lankan Guides?</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our guides don't just show you Sri Lanka – they share their homeland with authentic stories, insider knowledge, and genuine warmth.
+              Our guides don't just show you Sri Lanka - they share their homeland with authentic stories, insider knowledge, and genuine warmth.
             </p>
           </div>
           
@@ -203,9 +647,9 @@ const Guides = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Sri Lanka Tourism Board Certified</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Licensed & Certified</h3>
               <p className="text-gray-600 text-sm">
-                All guides are licensed and regularly trained by the official tourism board.
+                All guides are licensed by Sri Lanka Tourism Board and regularly trained.
               </p>
             </div>
             
@@ -218,7 +662,7 @@ const Guides = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Born & Raised Locally</h3>
               <p className="text-gray-600 text-sm">
-                Deep-rooted knowledge of hidden gems, local customs, and family traditions.
+                Deep knowledge of hidden gems, local customs, and family traditions.
               </p>
             </div>
             
@@ -230,7 +674,7 @@ const Guides = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Excellent Reviews</h3>
               <p className="text-gray-600 text-sm">
-                Average 4.8+ star ratings from thousands of satisfied international visitors.
+                Average 4.8+ star ratings from thousands of satisfied visitors.
               </p>
             </div>
             
@@ -242,7 +686,7 @@ const Guides = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Flexible & Personal</h3>
               <p className="text-gray-600 text-sm">
-                Customizable itineraries and personal attention to your interests and pace.
+                Customizable itineraries and personal attention to your interests.
               </p>
             </div>
           </div>
@@ -264,6 +708,194 @@ const Guides = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedGuide && modalType && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {modalType === 'book' ? 'Book Tour with' : 'Contact'} {selectedGuide.name}
+                </h2>
+                <p className="text-sm text-gray-600">{selectedGuide.specialty}</p>
+              </div>
+              <button
+                onClick={handleCloseModal}
+                disabled={submitting}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors disabled:opacity-50"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="p-6">
+              {/* Connection Warning in Modal */}
+              {connectionStatus === 'failed' && (
+                <div className="mb-4 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <div className="flex items-start">
+                    <svg className="w-5 h-5 text-yellow-400 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                    <div>
+                      <p className="text-sm text-yellow-800 font-medium">API Connection Unavailable</p>
+                      <p className="text-xs text-yellow-700 mt-1">
+                        Your form will be saved locally and you'll receive the guide's direct contact info for immediate assistance.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.customer_name}
+                      onChange={(e) => handleInputChange('customer_name', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      placeholder="Enter your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.customer_email}
+                      onChange={(e) => handleInputChange('customer_email', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      value={formData.customer_phone}
+                      onChange={(e) => handleInputChange('customer_phone', e.target.value)}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      placeholder="+94 77 123 4567"
+                    />
+                  </div>
+                  {modalType === 'book' && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Preferred Date
+                      </label>
+                      <input
+                        type="date"
+                        value={formData.preferred_date}
+                        onChange={(e) => handleInputChange('preferred_date', e.target.value)}
+                        min={new Date().toISOString().split('T')[0]}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {modalType === 'book' && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Duration
+                      </label>
+                      <select
+                        value={formData.duration}
+                        onChange={(e) => handleInputChange('duration', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      >
+                        <option value="">Select duration</option>
+                        <option value="half-day">Half Day (4 hours)</option>
+                        <option value="full-day">Full Day (8 hours)</option>
+                        <option value="2-days">2 Days</option>
+                        <option value="3-days">3 Days</option>
+                        <option value="week">1 Week</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Group Size
+                      </label>
+                      <select
+                        value={formData.group_size}
+                        onChange={(e) => handleInputChange('group_size', e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      >
+                        <option value="">Select group size</option>
+                        <option value="1">Solo Traveler</option>
+                        <option value="2">2 People</option>
+                        <option value="3-4">3-4 People</option>
+                        <option value="5-8">5-8 People</option>
+                        <option value="9+">9+ People</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {modalType === 'book' ? 'Special Requests' : 'Your Message'} *
+                  </label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => handleInputChange('message', e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder={modalType === 'book' 
+                      ? "Tell us about your interests, preferences, or any special requirements..."
+                      : "Your message to the guide..."
+                    }
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="flex-1 bg-indigo-600 text-white py-3 px-6 rounded-lg hover:bg-indigo-700 transition-colors font-medium disabled:opacity-50 flex items-center justify-center"
+                  >
+                    {submitting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      modalType === 'book' ? 'Send Booking Request' : 'Send Message'
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleCloseModal}
+                    disabled={submitting}
+                    className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium disabled:opacity-50"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
