@@ -15,6 +15,8 @@ const CustomTour = () => {
     specialRequests: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
 
   const toggleDestination = (id) => {
     if (selectedDestinations.includes(id)) {
@@ -48,22 +50,59 @@ const CustomTour = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log({
-      tourRequest,
-      selectedDestinations,
-      duration,
-      budget,
-      estimatedCost: calculateEstimatedCost()
-    });
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmissionError('');
+
+    try {
+      const customTourData = {
+        customer_name: tourRequest.name,
+        customer_email: tourRequest.email,
+        customer_phone: tourRequest.phone,
+        travel_date: tourRequest.travelDate,
+        number_of_travelers: tourRequest.travelers,
+        duration_days: duration,
+        budget_level: budget,
+        selected_destinations: selectedDestinations,
+        destination_names: selectedPlaces.map(place => place.name),
+        estimated_cost: calculateEstimatedCost(),
+        special_requests: tourRequest.specialRequests
+      };
+
+      console.log('Sending data:', customTourData);
+
+      const response = await fetch('http://localhost:5000/api/custom-tour-requests', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(customTourData)
+      });
+
+      console.log('Response status:', response.status);
+
+      const result = await response.json();
+      console.log('Response data:', result);
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        throw new Error(result.message || 'Failed to submit request');
+      }
+
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmissionError('Failed to submit request. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const resetForm = () => {
     setShowForm(false);
     setSubmitted(false);
+    setSubmissionError('');
     setTourRequest({
       name: '',
       email: '',
@@ -72,6 +111,9 @@ const CustomTour = () => {
       travelers: 1,
       specialRequests: ''
     });
+    setSelectedDestinations([]);
+    setDuration(7);
+    setBudget('medium');
   };
 
   return (
@@ -96,27 +138,40 @@ const CustomTour = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Thank You!</h3>
-                  <p className="text-gray-600 mb-4">Your tour request has been submitted successfully.</p>
-                  <p className="text-gray-600 mb-6">Our travel experts will contact you within 24 hours to discuss your custom tour.</p>
+                  <p className="text-gray-600 mb-4">Your custom tour request has been submitted successfully.</p>
+                  <p className="text-gray-600 mb-6">Our travel experts will contact you within 24 hours to discuss your personalized Sri Lankan adventure.</p>
                   <button
                     onClick={resetForm}
                     className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-medium"
                   >
-                    Close
+                    Plan Another Tour
                   </button>
                 </div>
               ) : (
                 <>
-                  <h2 className="text-2xl font-bold text-gray-800 mb-4">Confirm Your Tour Request</h2>
+                  <h2 className="text-2xl font-bold text-gray-800 mb-4">Confirm Your Custom Tour Request</h2>
                   <div className="mb-4 p-3 bg-gray-50 rounded">
                     <h3 className="font-medium text-gray-700">Tour Summary</h3>
-                    <p className="text-sm text-gray-600">
-                      {selectedPlaces.map(p => p.name).join(', ')}
+                    <p className="text-sm text-gray-600 mb-1">
+                      <strong>Destinations:</strong> {selectedPlaces.map(p => p.name).join(', ')}
+                    </p>
+                    <p className="text-sm text-gray-600 mb-1">
+                      <strong>Duration:</strong> {duration} days
+                    </p>
+                    <p className="text-sm text-gray-600 mb-1">
+                      <strong>Budget Level:</strong> {budget.charAt(0).toUpperCase() + budget.slice(1)}
                     </p>
                     <p className="text-sm text-gray-600">
-                      {duration} days • {budget} budget • ${calculateEstimatedCost()} per person
+                      <strong>Estimated Cost:</strong> ${calculateEstimatedCost()} per person
                     </p>
                   </div>
+
+                  {submissionError && (
+                    <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                      {submissionError}
+                    </div>
+                  )}
+
                   <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                       <label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
@@ -126,7 +181,8 @@ const CustomTour = () => {
                         value={tourRequest.name}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        disabled={isSubmitting}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
                       />
                     </div>
                     <div className="mb-4">
@@ -137,7 +193,8 @@ const CustomTour = () => {
                         value={tourRequest.email}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        disabled={isSubmitting}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
                       />
                     </div>
                     <div className="mb-4">
@@ -148,17 +205,20 @@ const CustomTour = () => {
                         value={tourRequest.phone}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        disabled={isSubmitting}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">Travel Date</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Preferred Travel Date</label>
                       <input
                         type="date"
                         name="travelDate"
                         value={tourRequest.travelDate}
                         onChange={handleInputChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        min={new Date().toISOString().split('T')[0]}
+                        disabled={isSubmitting}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
                       />
                     </div>
                     <div className="mb-4">
@@ -169,7 +229,9 @@ const CustomTour = () => {
                         value={tourRequest.travelers}
                         onChange={handleInputChange}
                         min="1"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        max="20"
+                        disabled={isSubmitting}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
                       />
                     </div>
                     <div className="mb-6">
@@ -179,22 +241,32 @@ const CustomTour = () => {
                         value={tourRequest.specialRequests}
                         onChange={handleInputChange}
                         rows={3}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        disabled={isSubmitting}
+                        placeholder="Any specific preferences, dietary requirements, accessibility needs, or special occasions..."
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-100"
                       />
                     </div>
                     <div className="flex justify-end space-x-3">
                       <button
                         type="button"
                         onClick={() => setShowForm(false)}
-                        className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100"
+                        disabled={isSubmitting}
+                        className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 disabled:bg-gray-100 disabled:text-gray-400"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
-                        className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-medium"
+                        disabled={isSubmitting}
+                        className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-medium disabled:bg-indigo-400 disabled:cursor-not-allowed flex items-center"
                       >
-                        Submit Request
+                        {isSubmitting && (
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                        )}
+                        {isSubmitting ? 'Submitting...' : 'Submit Request'}
                       </button>
                     </div>
                   </form>
@@ -274,10 +346,10 @@ const CustomTour = () => {
                   <ul className="space-y-2">
                     {selectedPlaces.map(place => (
                       <li key={place.id} className="flex items-center justify-between bg-gray-50 p-2 rounded">
-                        <span>{place.name}</span>
+                        <span className="text-sm">{place.name}</span>
                         <button 
                           onClick={() => toggleDestination(place.id)}
-                          className="text-red-500 hover:text-red-700"
+                          className="text-red-500 hover:text-red-700 text-lg"
                         >
                           ×
                         </button>
@@ -308,7 +380,7 @@ const CustomTour = () => {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Budget Level
                   </label>
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="grid grid-cols-2 gap-2">
                     {['low', 'medium', 'high', 'luxury'].map((level) => (
                       <button
                         key={level}
@@ -388,7 +460,7 @@ const CustomTour = () => {
               <div className="flex items-start">
                 <div className="flex-shrink-0 bg-indigo-100 p-2 rounded-lg">
                   <svg className="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 极速赛车开奖结果查询官网 10V3L4 14h7v7l9-11h-7z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
                 <div className="ml-3">
@@ -414,7 +486,7 @@ const CustomTour = () => {
               <div className="flex items-start">
                 <div className="flex-shrink-0 bg-indigo-100 p-2 rounded-lg">
                   <svg className="h-6 w-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 极速赛车开奖结果查询官网 0 003 9c0 5.591 3.824 10.29 9 极速赛车开奖结果查询官网 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
                 <div className="ml-3">
