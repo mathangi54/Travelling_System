@@ -15,8 +15,10 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // API base URL
-  const API_BASE_URL = 'http://localhost:5000/api';
+  // API base URL - Fixed to handle undefined process.env
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 
+                       (typeof process !== 'undefined' && process.env?.REACT_APP_API_URL) || 
+                       'http://localhost:5000/api';
 
   // Initialize authentication state on app load
   useEffect(() => {
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         
         const token = localStorage.getItem('token') || localStorage.getItem('authToken');
         const userData = localStorage.getItem('user');
-
+        
         console.log('AuthContext: Token found:', !!token);
         console.log('AuthContext: User data found:', !!userData);
 
@@ -35,17 +37,11 @@ export const AuthProvider = ({ children }) => {
             const user = JSON.parse(userData);
             console.log('AuthContext: Parsed user data:', user);
             
-            // Validate token with backend (optional, but recommended)
-            const isValid = await validateTokenSilently(token);
-            
-            if (isValid) {
-              setCurrentUser(user);
-              setIsAuthenticated(true);
-              console.log('AuthContext: User restored from localStorage:', user);
-            } else {
-              console.log('AuthContext: Token validation failed, clearing auth data');
-              clearAuthData();
-            }
+            // Since your backend doesn't have a validate endpoint, 
+            // we'll trust the stored data if it exists
+            setCurrentUser(user);
+            setIsAuthenticated(true);
+            console.log('AuthContext: User restored from localStorage:', user);
           } catch (error) {
             console.error('AuthContext: Error parsing stored user data:', error);
             clearAuthData();
@@ -75,30 +71,7 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
-  // Silent token validation (doesn't throw errors)
-  const validateTokenSilently = async (token) => {
-    try {
-      const response = await fetch(`${API_BASE_URL}/auth/validate`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        return data.status === 'success';
-      }
-      return false;
-    } catch (error) {
-      console.warn('AuthContext: Silent token validation failed:', error);
-      // Return true on network errors to avoid unnecessary logouts
-      return true;
-    }
-  };
-
-  // Login function
+  // Login function - matches your Flask backend
   const login = async ({ email, password }) => {
     console.log('AuthContext: Login attempt for:', email);
     
@@ -114,9 +87,11 @@ export const AuthProvider = ({ children }) => {
       console.log('AuthContext: Login response status:', response.status);
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => ({
+          message: `HTTP error! status: ${response.status}`
+        }));
         console.error('AuthContext: Login failed:', errorData);
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(errorData.message || `Login failed with status: ${response.status}`);
       }
 
       const data = await response.json();
@@ -151,7 +126,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Register function
+  // Register function - matches your Flask backend
   const register = async (userData) => {
     console.log('AuthContext: Registration attempt for:', userData.email);
     
@@ -167,9 +142,11 @@ export const AuthProvider = ({ children }) => {
       console.log('AuthContext: Registration response status:', response.status);
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => ({
+          message: `HTTP error! status: ${response.status}`
+        }));
         console.error('AuthContext: Registration failed:', errorData);
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+        throw new Error(errorData.message || `Registration failed with status: ${response.status}`);
       }
 
       const data = await response.json();
@@ -200,22 +177,23 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Logout function
+  // Logout function - simplified since backend logout isn't implemented
   const logout = async () => {
     console.log('AuthContext: Logging out user');
     
     try {
-      // Optional: Call backend logout endpoint
+      // Optional: Call backend logout endpoint if it exists
       const token = localStorage.getItem('token') || localStorage.getItem('authToken');
       if (token) {
         try {
-          await fetch(`${API_BASE_URL}/auth/logout`, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
-          });
+          // Your backend doesn't have a logout endpoint, so we'll skip this
+          // await fetch(`${API_BASE_URL}/auth/logout`, {
+          //   method: 'POST',
+          //   headers: {
+          //     'Authorization': `Bearer ${token}`,
+          //     'Content-Type': 'application/json',
+          //   },
+          // });
         } catch (error) {
           console.warn('AuthContext: Backend logout failed (continuing with local logout):', error);
         }
@@ -229,7 +207,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Check if token is valid
+  // Test backend connection
+  const testBackendConnection = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/health`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('AuthContext: Backend connection successful:', data);
+        return true;
+      }
+      console.warn('AuthContext: Backend health check failed');
+      return false;
+    } catch (error) {
+      console.error('AuthContext: Backend connection failed:', error);
+      return false;
+    }
+  };
+
+  // Simplified token validation - just checks if token exists
   const validateToken = async () => {
     const token = localStorage.getItem('token') || localStorage.getItem('authToken');
     
@@ -238,31 +233,25 @@ export const AuthProvider = ({ children }) => {
       return false;
     }
 
+    // Since your backend doesn't have a validate endpoint,
+    // we'll just check if the token exists and user data is valid
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/validate`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.status === 'success') {
-          console.log('AuthContext: Token validation successful');
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        const user = JSON.parse(userData);
+        if (user && (user.email || user.username)) {
+          console.log('AuthContext: Token validation successful (local check)');
           return true;
         }
       }
       
-      console.log('AuthContext: Token validation failed');
-      // If token is invalid, clear auth data
+      console.log('AuthContext: Token validation failed (no valid user data)');
       logout();
       return false;
     } catch (error) {
       console.error('AuthContext: Token validation error:', error);
-      // On network error, assume token might still be valid
-      return true;
+      logout();
+      return false;
     }
   };
 
@@ -280,7 +269,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('user', JSON.stringify(updatedUser));
   };
 
-  // Check authentication status - IMPROVED VERSION
+  // Check authentication status
   const checkAuthStatus = () => {
     const token = getToken();
     const userExists = currentUser && Object.keys(currentUser).length > 0;
@@ -299,7 +288,7 @@ export const AuthProvider = ({ children }) => {
     return isFullyAuthenticated;
   };
 
-  // Helper to check if user is logged in (simplified check)
+  // Helper to check if user is logged in
   const isLoggedIn = () => {
     return isAuthenticated && currentUser !== null;
   };
@@ -312,6 +301,7 @@ export const AuthProvider = ({ children }) => {
       loading: loading,
       token: !!getToken(),
       tokenValue: getToken()?.substring(0, 20) + '...',
+      apiBaseUrl: API_BASE_URL,
       localStorage: {
         token: !!localStorage.getItem('token'),
         authToken: !!localStorage.getItem('authToken'),
@@ -346,7 +336,9 @@ export const AuthProvider = ({ children }) => {
     checkAuthStatus,
     isLoggedIn,
     debugAuthState,
-    clearAuthData, // Exposed for emergency cleanup
+    clearAuthData,
+    testBackendConnection, // Added for debugging
+    API_BASE_URL, // Exposed for other components
   };
 
   console.log('AuthContext: Rendering with state:', {

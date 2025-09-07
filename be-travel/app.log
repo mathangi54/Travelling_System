@@ -1,3 +1,4 @@
+
 2025-08-05 11:58:15,290 - __main__ - INFO - Database tables initialized successfully
 2025-08-05 11:58:15,342 - werkzeug - WARNING -  * Debugger is active!
 2025-08-05 11:58:15,353 - werkzeug - INFO -  * Debugger PIN: 110-758-841
@@ -8587,3 +8588,1167 @@
 2025-09-07 01:56:56,010 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
 2025-09-07 01:56:56,010 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:56:56] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
 2025-09-07 01:56:56,012 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:56:56] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:07:39,579 - __main__ - INFO - Starting Sri Lanka AI-powered tour system with comprehensive CORS fix...
+2025-09-07 07:07:39,706 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.244:5000
+2025-09-07 07:07:39,708 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 07:08:13,011 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:08:13,011 - __main__ - INFO - Initializing Sri Lanka AI-powered tour system...
+2025-09-07 07:08:13,049 - __main__ - INFO - Database connection successful!
+2025-09-07 07:08:13,121 - __main__ - INFO - Database tables initialized successfully!
+2025-09-07 07:08:13,121 - __main__ - INFO - Database initialized successfully
+2025-09-07 07:08:13,267 - models - INFO - Loaded recommendation_model.pkl
+2025-09-07 07:08:13,400 - models - INFO - Loaded pricing_model.pkl
+2025-09-07 07:08:13,571 - models - INFO - Loaded segmentation_model.pkl
+2025-09-07 07:08:13,598 - models - INFO - Loaded similarity_model.pkl
+2025-09-07 07:08:13,618 - models - INFO - Loaded scaler.pkl
+2025-09-07 07:08:13,642 - models - INFO - Loaded label_encoders.pkl
+2025-09-07 07:08:13,651 - models - INFO - All AI models loaded successfully!
+2025-09-07 07:08:13,651 - __main__ - INFO - AI models loaded successfully!
+2025-09-07 07:08:13,653 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:08:13,657 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:13] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:08:13,664 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:08:13,677 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:08:13,679 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:13] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:08:14,194 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:14,197 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:08:14,198 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:14] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:08:14,199 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:14,199 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:08:14,200 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:14] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:08:14,422 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:14,423 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:14,424 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:14] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:14,529 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:14,529 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:14,531 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:14] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:24,457 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:08:24,514 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:08:24,515 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:24] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:08:24,714 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:08:24,728 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:08:24,730 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:24] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:08:24,835 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:24,836 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:24,837 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:24] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:24,886 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:24,887 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:24,888 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:24,889 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:24,890 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:24,890 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:24,891 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:24] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:24,891 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:24] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:24,892 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:24] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:24,917 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:24,919 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:24,920 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:24] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,040 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,041 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,041 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,149 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,150 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,151 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,231 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,233 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,234 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,234 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,234 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,235 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,235 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,238 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,239 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,247 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,251 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,265 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,353 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,356 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,357 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,460 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,461 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,461 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,557 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,558 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,559 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,560 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,560 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,561 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,561 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,562 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,562 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,589 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,594 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,602 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,676 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,679 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,680 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,811 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,814 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,819 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,893 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,896 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,898 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,901 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,904 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,909 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,911 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,912 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,914 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:25,940 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:25,949 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:25,959 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:25] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,004 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,009 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,011 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,140 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,141 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,142 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,240 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,246 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,251 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,254 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,256 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,265 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,270 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,281 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,290 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,304 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,315 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,334 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,339 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,343 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,346 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,466 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,467 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,469 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,585 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,590 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,594 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,621 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,628 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,633 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,638 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,641 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,642 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,668 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,681 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:26,682 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,684 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:26,687 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:26,689 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:26] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:34,094 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:34,095 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:34,097 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:34,098 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:34,099 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:34] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:34,099 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:34] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:37,334 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:08:37,369 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:08:37,371 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:37] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:08:37,695 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:08:37,720 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:08:37,722 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:37] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:08:37,746 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:37,749 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:37,750 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:37,751 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:37,754 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:37,754 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:37,756 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:37,757 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:37,757 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:37,758 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:37,759 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:37] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:37,760 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:37] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:37,762 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:37] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:37,763 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:37] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:37,764 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:37] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,044 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,047 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,049 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,098 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,102 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,103 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,105 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,107 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,110 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,112 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,112 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,114 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,114 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,117 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,119 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,121 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,124 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,128 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,377 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,379 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,380 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,466 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,467 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,469 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,472 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,474 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,475 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,477 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,479 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,481 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,484 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,485 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,488 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,493 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,495 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,497 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,703 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,704 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,705 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,824 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,834 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,841 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,843 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,847 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,848 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,853 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,854 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,859 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,861 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:38,863 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,866 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,871 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:38,872 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:38,880 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,027 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,028 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,029 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,183 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,186 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,188 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,191 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,193 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,194 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,220 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,223 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,225 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,228 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,230 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,231 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,231 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,232 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,233 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,354 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,356 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,358 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,525 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,526 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,528 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,529 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,530 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,532 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,565 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,570 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,572 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,574 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,576 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,578 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,580 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,581 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,587 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:08:39,676 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:08:39,678 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:08:39,680 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:08:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:10,367 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:14:10,487 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:14:10,489 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:10] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:14:10,568 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:14:10,581 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:14:10,582 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:10] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:14:10,801 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:14:10,854 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:14:10,856 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:10] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:14:10,862 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:14:10,883 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:14:10,885 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:10] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:14:11,268 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,270 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,270 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,271 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,274 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,274 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,275 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,275 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,277 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,279 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,280 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,281 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,282 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,283 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,285 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,290 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,291 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,292 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,605 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,606 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,609 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,620 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,621 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,611 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,627 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,628 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,639 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,641 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,644 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,647 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,647 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,651 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,653 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,656 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,658 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,663 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,964 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:11,966 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:11,979 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:11] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:11,985 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,007 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,011 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,012 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,015 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,027 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,033 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,035 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,036 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,044 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,063 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,065 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,067 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,070 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,084 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,313 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,314 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,314 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,376 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,379 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,379 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,380 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,380 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,382 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,395 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,396 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,398 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,411 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,412 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,414 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,417 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,417 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,419 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,638 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,638 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,639 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,697 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,698 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,698 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,700 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,700 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,700 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,713 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,717 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,719 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,731 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,733 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,733 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,734 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,737 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,737 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:12,960 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:12,961 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:12,963 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:12] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:13,032 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:13,033 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:13,036 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:13,037 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:13] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:13,037 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:13,039 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:13] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:13,040 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:13,041 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:13,044 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:13] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:13,049 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:13,055 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:13,058 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:14:13,058 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:13] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:14:13,061 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:14:13,064 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:14:13] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:41,884 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:15:42,016 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:15:42,017 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:42] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:15:42,027 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:15:42,042 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:15:42,044 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:42] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:15:42,416 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:15:42,458 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:15:42,459 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:42] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:15:42,677 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:15:42,711 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:15:42,716 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:42] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:15:42,830 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:42,833 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:42,836 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:42] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,033 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,035 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,039 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,040 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,041 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,043 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,049 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,051 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,071 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,078 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,081 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,083 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,089 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,091 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,092 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,471 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,472 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,473 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,474 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,475 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,475 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,476 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,479 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,482 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,483 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,484 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,489 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,491 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,493 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,498 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,507 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,514 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,515 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,832 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,835 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,838 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,841 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,841 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,844 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,847 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:43,848 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,851 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,852 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,854 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,854 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,855 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:43,856 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,859 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,861 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,863 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:43,866 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:43] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:44,234 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,235 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,237 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,237 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:44,239 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:44,240 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:44,241 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:44,242 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:44,243 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,247 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:44,251 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,262 - __main__ - INFO - OPTIONS /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,262 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:44,265 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:44,266 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:44,266 - __main__ - INFO - Handling OPTIONS request for /api/ai-pricing
+2025-09-07 07:15:44,277 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:44,280 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "OPTIONS /api/ai-pricing HTTP/1.1" 200 -
+2025-09-07 07:15:44,574 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,575 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:44,577 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,579 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:44,580 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:44,585 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:44,592 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,606 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:44,611 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,615 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,619 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,622 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:44,624 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:44,629 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:44,630 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:44,631 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:44,633 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:44,634 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:44,927 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,932 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:44,933 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:44,934 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:44,936 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:44,937 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:44] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,005 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,009 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,012 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,016 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,020 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,023 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,026 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,029 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,031 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,045 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,056 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,057 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,288 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,289 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,290 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,316 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,324 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,326 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,391 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,393 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,395 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,396 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,397 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,400 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,401 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,404 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,407 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,408 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,410 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,411 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,617 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,619 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,620 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,666 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,669 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,670 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,741 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,743 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,745 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,746 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,747 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,749 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,756 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,759 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,762 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,767 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,771 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,773 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,947 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,948 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,949 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:45,988 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:45,989 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:45,990 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,078 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,079 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,080 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,081 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,082 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,083 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,105 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,110 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,111 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,112 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,115 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,118 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,265 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,266 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,267 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,312 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,313 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,314 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,409 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,411 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,413 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,415 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,417 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,420 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,443 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,444 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:15:46,445 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,446 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:15:46,450 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:15:46,452 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:15:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:01,759 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:16:01,790 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:16:01,791 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:01] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:16:02,352 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:16:02,379 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:16:02,380 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:02] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:16:02,724 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:16:02,742 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:16:02,744 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:02] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:16:03,629 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:16:03,656 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:16:03,660 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:03] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:16:03,791 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:03,792 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:03,795 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:03,799 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:03,799 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:03,800 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:03,801 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:03,804 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:03,805 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:03] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:03,807 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:03] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:03,810 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:03] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:03,813 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:03,814 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:03] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:03,819 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:03,821 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:03] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:04,540 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:04,540 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:04,542 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:04] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:04,708 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:04,709 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:04,709 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:04] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:04,719 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:04,721 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:04,723 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:04] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:04,725 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:04,725 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:04,728 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:04] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:04,738 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:04,739 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:04,740 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:04] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:04,769 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:04,771 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:04,772 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:04] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:05,432 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:05,433 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:05,434 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:05] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:05,596 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:05,597 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:05,598 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:05] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:05,614 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:05,614 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:05,615 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:05] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:05,649 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:05,651 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:05,651 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:05] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:05,680 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:05,681 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:05,682 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:05] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:05,694 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:05,694 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:05,695 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:05] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:06,323 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:06,324 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:06,325 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:06] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:06,490 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:06,491 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:06,492 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:06] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:06,528 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:06,529 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:06,532 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:06] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:06,678 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:06,680 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:06,681 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:06] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:06,682 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:06,684 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:06,686 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:06,686 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:06] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:06,686 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:06,688 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:06] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:07,211 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:07,211 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:07,212 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:07] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:07,399 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:07,401 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:07,402 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:07] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:07,419 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:07,420 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:07,420 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:07] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:07,440 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:07,442 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:07,442 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:07] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:07,465 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:07,465 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:07,466 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:07] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:07,476 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:07,476 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:07,477 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:07] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:08,135 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:08,135 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:08,136 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:08] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:08,302 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:08,302 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:08,303 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:08] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:08,318 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:08,318 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:08,319 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:08] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:08,346 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:08,347 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:08,348 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:08] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:08,389 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:08,390 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:08,391 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:08] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:08,411 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:08,412 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:08,413 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:08] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:16:09,027 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:16:09,029 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:16:09,030 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:16:09] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:18:08,165 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:18:08,177 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:18:08,179 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:18:08] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:18:08,745 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:18:08,763 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:18:08,765 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:18:08] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:19:35,199 - __main__ - INFO - OPTIONS /api/auth/login from http://localhost:5173
+2025-09-07 07:19:35,200 - __main__ - INFO - Handling OPTIONS request for /api/auth/login
+2025-09-07 07:19:35,201 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:19:35] "OPTIONS /api/auth/login HTTP/1.1" 200 -
+2025-09-07 07:19:35,443 - __main__ - INFO - POST /api/auth/login from http://localhost:5173
+2025-09-07 07:19:35,804 - __main__ - DEBUG - Response to POST /api/auth/login: 200
+2025-09-07 07:19:35,805 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:19:35] "POST /api/auth/login HTTP/1.1" 200 -
+2025-09-07 07:19:36,134 - __main__ - INFO - GET /api/ai-status from http://localhost:5173
+2025-09-07 07:19:36,137 - __main__ - DEBUG - Response to GET /api/ai-status: 404
+2025-09-07 07:19:36,138 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:19:36] "[33mGET /api/ai-status HTTP/1.1[0m" 404 -
+2025-09-07 07:19:37,020 - __main__ - INFO - GET /api/ai-status from http://localhost:5173
+2025-09-07 07:19:37,022 - __main__ - DEBUG - Response to GET /api/ai-status: 404
+2025-09-07 07:19:37,022 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:19:37] "[33mGET /api/ai-status HTTP/1.1[0m" 404 -
+2025-09-07 07:20:48,533 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:48,558 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:48,560 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:48] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:48,781 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:48,782 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:48,782 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:48] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:48,875 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:48,876 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:48,877 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:48] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:48,890 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:48,891 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:48,892 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:48] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:49,200 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:49,216 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:49,217 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:49,218 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:49,219 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:49,219 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:49,219 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:49] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:49,220 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:49] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:49,220 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:49] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:49,239 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:49,242 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:49,244 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:49] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:49,543 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:49,543 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:49,545 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:49] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:49,559 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:49,560 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:49,561 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:49,562 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:49,562 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:49] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:49,562 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:49] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:49,886 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:49,887 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:49,899 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:49,900 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:49,900 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:49] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:49,900 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:49] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:50,211 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:50,212 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:50,212 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:50] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:50,213 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:50,214 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:50,215 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:50] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:50,522 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:50,524 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:50,524 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:50] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:50,534 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:50,536 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:50,537 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:50] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:50,836 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:50,837 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:50,837 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:50,839 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:50,839 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:50] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:50,840 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:50] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:51,166 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:51,167 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:51,167 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:51,168 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:51,169 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:51] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:51,169 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:51] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:51,494 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:20:51,497 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:51,497 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:20:51,499 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:51,500 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:51] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:20:51,500 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:51] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:20:51,827 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:20:51,828 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:20:51,828 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:20:51] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:35,948 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:21:35,954 - __main__ - INFO - OPTIONS /api/auth/validate from http://localhost:5173
+2025-09-07 07:21:35,954 - __main__ - INFO - OPTIONS /api/auth/validate from http://localhost:5173
+2025-09-07 07:21:35,955 - __main__ - INFO - Handling OPTIONS request for /api/auth/validate
+2025-09-07 07:21:35,955 - __main__ - INFO - Handling OPTIONS request for /api/auth/validate
+2025-09-07 07:21:35,956 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:35] "OPTIONS /api/auth/validate HTTP/1.1" 200 -
+2025-09-07 07:21:35,958 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:35] "OPTIONS /api/auth/validate HTTP/1.1" 200 -
+2025-09-07 07:21:35,975 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:21:35,976 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:35] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:21:36,213 - __main__ - INFO - GET /api/auth/validate from http://localhost:5173
+2025-09-07 07:21:36,214 - __main__ - DEBUG - Response to GET /api/auth/validate: 404
+2025-09-07 07:21:36,215 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:36] "[33mGET /api/auth/validate HTTP/1.1[0m" 404 -
+2025-09-07 07:21:36,537 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:21:36,566 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:21:36,567 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:36] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:21:36,905 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:21:36,925 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:21:36,926 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:36] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:21:37,115 - __main__ - INFO - GET /api/auth/validate from http://localhost:5173
+2025-09-07 07:21:37,116 - __main__ - DEBUG - Response to GET /api/auth/validate: 404
+2025-09-07 07:21:37,117 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:37] "[33mGET /api/auth/validate HTTP/1.1[0m" 404 -
+2025-09-07 07:21:37,818 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:21:37,862 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:21:37,864 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:37] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:21:37,946 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:37,948 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:37,953 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:37] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:38,840 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:38,843 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:38,844 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:38] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:38,858 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:38,860 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:38,862 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:38] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:39,432 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:39,434 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:39,435 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:39] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:39,754 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:39,756 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:39,756 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:39] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:40,333 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:40,334 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:40,335 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:40] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:40,336 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:40,337 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:40,340 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:40] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:41,242 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:41,243 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:41,243 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:41] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:41,261 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:41,262 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:41,263 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:41] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:42,149 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:42,149 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:42,150 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:42,150 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:42,150 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:42] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:42,151 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:42] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:43,031 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:43,032 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:43,032 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:43] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:43,040 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:43,042 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:43,043 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:43] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:43,931 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:43,932 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:43,934 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:43,934 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:43,935 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:43] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:43,935 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:43] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:44,831 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:44,832 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:44,832 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:44,832 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:44,834 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:44] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:44,834 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:44] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:45,737 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:45,738 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:45,739 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:45,739 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:45,740 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:45] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:45,740 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:45] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:46,636 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:46,637 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:46,637 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:46,638 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:46,638 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:46] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:46,639 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:46] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:47,539 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:47,539 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:47,540 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:47,540 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:47,541 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:47] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:47,541 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:47] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:48,450 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:48,451 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:48,452 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:48,452 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:48,454 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:48] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:48,455 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:48] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:49,338 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:49,338 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:49,340 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:49,341 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:49,341 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:49] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:49,341 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:49] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:50,240 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:50,240 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:50,241 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:50,241 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:50,242 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:50] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:50,243 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:50] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:51,144 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:51,144 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:51,145 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:51,146 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:51,147 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:51] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:51,147 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:51] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:52,062 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:52,063 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:52,063 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:52,064 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:52,065 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:52] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:52,065 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:52] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:52,651 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:52,651 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:52,653 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:52] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:52,960 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:52,961 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:52,962 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:52] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:53,552 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:53,552 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:53,553 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:53,553 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:53,553 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:53] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:53,555 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:53] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:54,462 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:54,474 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:54,476 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:54,476 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:54,477 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:54] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:54,477 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:54] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:55,365 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:55,368 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:55,368 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:55,369 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:55,369 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:55] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:55,371 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:55] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:56,265 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:56,265 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:56,266 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:56,266 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:56,267 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:56] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:56,267 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:56] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:57,159 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:57,160 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:57,160 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:57,162 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:57] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:57,162 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:57,175 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:57] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:58,056 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:58,057 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:58,057 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:58,058 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:58,058 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:58] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:58,059 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:58] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:58,967 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:58,968 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:58,970 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:58,971 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:58,973 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:58] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:58,973 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:58] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:21:59,868 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:21:59,868 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:21:59,869 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:21:59,870 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:21:59,870 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:59] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:21:59,870 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:21:59] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:00,769 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:00,769 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:00,769 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:00,770 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:00,771 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:00] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:00,771 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:00] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:01,666 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:01,667 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:01,668 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:01,668 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:01,670 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:01] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:01,670 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:01] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:02,574 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:02,575 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:02,576 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:02,577 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:02,577 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:02] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:02,578 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:02] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:03,480 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:03,481 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:03,481 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:03,482 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:03,482 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:03] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:03,483 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:03] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:04,395 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:04,396 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:04,396 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:04,397 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:04,397 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:04] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:04,399 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:04] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:05,285 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:05,286 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:05,287 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:05,287 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:05,288 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:05] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:05,288 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:05] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:06,183 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:06,184 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:06,185 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:06,185 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:06,186 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:06] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:06,187 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:06] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:07,075 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:07,076 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:07,077 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:07,077 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:07,078 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:07] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:07,079 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:07] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:07,957 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:07,957 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:07,958 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:07,958 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:07,959 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:07] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:07,959 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:07] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:08,849 - __main__ - INFO - GET /api/health from http://localhost:5173
+2025-09-07 07:22:08,850 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:08,850 - __main__ - DEBUG - Response to GET /api/health: 200
+2025-09-07 07:22:08,851 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:08,852 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:08] "GET /api/health HTTP/1.1" 200 -
+2025-09-07 07:22:08,852 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:08] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:22:09,738 - __main__ - INFO - POST /api/ai-pricing from http://localhost:5173
+2025-09-07 07:22:09,741 - __main__ - DEBUG - Response to POST /api/ai-pricing: 404
+2025-09-07 07:22:09,742 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:22:09] "[33mPOST /api/ai-pricing HTTP/1.1[0m" 404 -
+2025-09-07 07:25:59,589 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:25:59,614 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:25:59,616 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:25:59] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:26:00,166 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:26:00,190 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:26:00,193 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:26:00] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:26:00,553 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:26:00,585 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:26:00,589 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:26:00] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:26:01,460 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:26:01,491 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:26:01,495 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:26:01] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:27:54,991 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:27:55,019 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:27:55,021 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:27:55] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:27:55,580 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:27:55,593 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:27:55,596 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:27:55] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:27:55,942 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:27:55,971 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:27:55,973 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:27:55] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:27:56,855 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:27:56,908 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:27:56,912 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:27:56] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:29:48,779 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:29:48,792 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:29:48,793 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:29:48] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:29:49,039 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:29:49,047 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:29:49,049 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:29:49] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:29:55,841 - __main__ - INFO - POST /api/auth/login from http://localhost:5173
+2025-09-07 07:29:56,163 - __main__ - DEBUG - Response to POST /api/auth/login: 200
+2025-09-07 07:29:56,165 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:29:56] "POST /api/auth/login HTTP/1.1" 200 -
+2025-09-07 07:30:17,046 - __main__ - INFO - GET /api/auth/validate from http://localhost:5173
+2025-09-07 07:30:17,046 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:30:17,049 - __main__ - DEBUG - Response to GET /api/auth/validate: 404
+2025-09-07 07:30:17,051 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:30:17] "[33mGET /api/auth/validate HTTP/1.1[0m" 404 -
+2025-09-07 07:30:17,060 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:30:17,062 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:30:17] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:30:17,627 - __main__ - INFO - GET /api/auth/validate from http://localhost:5173
+2025-09-07 07:30:17,628 - __main__ - DEBUG - Response to GET /api/auth/validate: 404
+2025-09-07 07:30:17,628 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:30:17] "[33mGET /api/auth/validate HTTP/1.1[0m" 404 -
+2025-09-07 07:30:17,931 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:30:17,937 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:30:17,938 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:30:17] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:47:01,894 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:47:01,907 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:47:01,907 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:47:01] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:47:02,481 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:47:02,490 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:47:02,494 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:47:02] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:47:48,697 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:47:48,697 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:47:48,707 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:47:48] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:47:48,943 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:47:48,952 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:47:48,952 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:47:48] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:47:49,016 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:47:49,048 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:47:49,059 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:47:49] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:47:49,060 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:47:49,076 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:47:49,076 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:47:49] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:55:25,848 - __main__ - INFO - Starting Sri Lanka AI-powered tour system with comprehensive CORS fix...
+2025-09-07 07:55:25,938 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.244:5000
+2025-09-07 07:55:25,938 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 07:55:37,598 - __main__ - INFO - POST /api/auth/login from http://localhost:5173
+2025-09-07 07:55:37,599 - __main__ - INFO - Initializing Sri Lanka AI-powered tour system...
+2025-09-07 07:55:37,633 - __main__ - INFO - Database connection successful!
+2025-09-07 07:55:37,694 - __main__ - INFO - Database tables initialized successfully!
+2025-09-07 07:55:37,696 - __main__ - INFO - Database initialized successfully
+2025-09-07 07:55:37,825 - models - INFO - Loaded recommendation_model.pkl
+2025-09-07 07:55:37,913 - models - INFO - Loaded pricing_model.pkl
+2025-09-07 07:55:38,076 - models - INFO - Loaded segmentation_model.pkl
+2025-09-07 07:55:38,080 - models - INFO - Loaded similarity_model.pkl
+2025-09-07 07:55:38,083 - models - INFO - Loaded scaler.pkl
+2025-09-07 07:55:38,086 - models - INFO - Loaded label_encoders.pkl
+2025-09-07 07:55:38,090 - models - INFO - All AI models loaded successfully!
+2025-09-07 07:55:38,091 - __main__ - INFO - AI models loaded successfully!
+2025-09-07 07:55:38,341 - __main__ - DEBUG - Response to POST /api/auth/login: 200
+2025-09-07 07:55:38,344 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:55:38] "POST /api/auth/login HTTP/1.1" 200 -
+2025-09-07 07:55:50,842 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:55:50,855 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:55:50,858 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:55:50] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:55:51,150 - __main__ - INFO - GET /api/auth/validate from http://localhost:5173
+2025-09-07 07:55:51,151 - __main__ - DEBUG - Response to GET /api/auth/validate: 404
+2025-09-07 07:55:51,153 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:55:51] "[33mGET /api/auth/validate HTTP/1.1[0m" 404 -
+2025-09-07 07:55:51,739 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 07:55:51,753 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 07:55:51,755 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:55:51] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 07:55:51,784 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:55:51,800 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:55:51,802 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:55:51] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 07:55:52,045 - __main__ - INFO - GET /api/auth/validate from http://localhost:5173
+2025-09-07 07:55:52,045 - __main__ - DEBUG - Response to GET /api/auth/validate: 404
+2025-09-07 07:55:52,047 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:55:52] "[33mGET /api/auth/validate HTTP/1.1[0m" 404 -
+2025-09-07 07:55:52,694 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 07:55:52,704 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 07:55:52,705 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 07:55:52] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 08:07:28,685 - __main__ - INFO - Starting Sri Lanka AI-powered tour system with comprehensive CORS fix...
+2025-09-07 08:07:28,762 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.244:5000
+2025-09-07 08:07:28,763 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 08:07:36,824 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 08:07:36,825 - __main__ - INFO - Initializing Sri Lanka AI-powered tour system...
+2025-09-07 08:07:36,848 - __main__ - INFO - Database connection successful!
+2025-09-07 08:07:36,898 - __main__ - INFO - Database tables initialized successfully!
+2025-09-07 08:07:36,899 - __main__ - INFO - Database initialized successfully
+2025-09-07 08:07:36,997 - models - INFO - Loaded recommendation_model.pkl
+2025-09-07 08:07:37,069 - models - INFO - Loaded pricing_model.pkl
+2025-09-07 08:07:37,167 - models - INFO - Loaded segmentation_model.pkl
+2025-09-07 08:07:37,172 - models - INFO - Loaded similarity_model.pkl
+2025-09-07 08:07:37,175 - models - INFO - Loaded scaler.pkl
+2025-09-07 08:07:37,177 - models - INFO - Loaded label_encoders.pkl
+2025-09-07 08:07:37,179 - models - INFO - All AI models loaded successfully!
+2025-09-07 08:07:37,181 - __main__ - INFO - AI models loaded successfully!
+2025-09-07 08:07:37,183 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 08:07:37,186 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 08:07:37] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 08:07:37,194 - __main__ - INFO - GET /api/test-db from http://localhost:5173
+2025-09-07 08:07:37,205 - __main__ - DEBUG - Response to GET /api/test-db: 200
+2025-09-07 08:07:37,208 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 08:07:37] "GET /api/test-db HTTP/1.1" 200 -
+2025-09-07 08:07:37,544 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 08:07:37,563 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 08:07:37,566 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 08:07:37] "GET /api/tours HTTP/1.1" 200 -
+2025-09-07 08:07:37,811 - __main__ - INFO - GET /api/tours from http://localhost:5173
+2025-09-07 08:07:37,843 - __main__ - DEBUG - Response to GET /api/tours: 200
+2025-09-07 08:07:37,845 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 08:07:37] "GET /api/tours HTTP/1.1" 200 -

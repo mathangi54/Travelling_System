@@ -51,10 +51,11 @@ const useAppInitialization = () => {
     const initializeApp = async () => {
       try {
         // Check API connection
-        const response = await fetch('http://localhost:5000/api/test-db');
+        const response = await fetch('http://localhost:5000/api/health');
         if (!response.ok) {
           throw new Error('Backend server is not running');
         }
+        console.log('Backend connection successful');
         setIsInitialized(true);
       } catch (error) {
         console.error('App initialization error:', error);
@@ -148,6 +149,39 @@ function PublicRoute({ children }) {
   return children;
 }
 
+// Debug Auth Component
+function AuthDebug() {
+  const auth = useAuth();
+  
+  return (
+    <div style={{ padding: '20px', backgroundColor: '#f0f0f0', fontFamily: 'monospace' }}>
+      <h1>Authentication Debug Information</h1>
+      <pre style={{ backgroundColor: 'white', padding: '10px', borderRadius: '5px' }}>
+        {JSON.stringify({
+          currentUser: auth.currentUser,
+          isAuthenticated: auth.isAuthenticated,
+          loading: auth.loading,
+          hasToken: !!auth.getToken(),
+          apiBaseUrl: auth.API_BASE_URL
+        }, null, 2)}
+      </pre>
+      <button 
+        onClick={() => console.log('Full auth state:', auth.debugAuthState())}
+        style={{ 
+          padding: '10px 20px', 
+          backgroundColor: 'blue', 
+          color: 'white', 
+          border: 'none',
+          borderRadius: '5px',
+          marginTop: '10px'
+        }}
+      >
+        Log Full Auth State to Console
+      </button>
+    </div>
+  );
+}
+
 // Main App Content
 function AppContent() {
   const { isInitialized, initError } = useAppInitialization();
@@ -206,17 +240,23 @@ function AppContent() {
             } 
           />
 
-          {/* CHANGED: AI Training Dashboard - Now requires only authentication, not admin */}
-          <Route 
-            path="/ai-training" 
-            element={
-              <ProtectedRoute requireAuth={true} requireAdmin={false}>
-                <AITrainingDashboard />
-              </ProtectedRoute>
-            } 
-          />
+      <Route path="/ai-training" element={
+  <div style={{ 
+    padding: '50px', 
+    backgroundColor: 'red', 
+    color: 'white', 
+    fontSize: '24px',
+    minHeight: '100vh' 
+  }}>
+    <h1>ROUTING TEST - YOU SHOULD SEE THIS</h1>
+    <p>If you see this red text, routing is working</p>
+  </div>
+} />
 
-          {/* If you want to create an admin-only route, you can add it like this: */}
+          {/* Debug route to check authentication state */}
+          <Route path="/debug-auth" element={<AuthDebug />} />
+
+          {/* Admin-only route example (if needed later) */}
           {/* 
           <Route 
             path="/admin" 

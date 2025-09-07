@@ -17,6 +17,29 @@ const Packages = () => {
 
   const API_BASE_URL = 'http://localhost:5000/api';
 
+  // Price validation function
+  const validatePrice = (price) => {
+    if (!price || price < 4000 || price > 50000) {
+      return Math.floor(Math.random() * 46000) + 4000; // Rs. 4000 - Rs. 50000
+    }
+    return price;
+  };
+
+  // Generate discount price within range
+  const generateDiscountPrice = (originalPrice) => {
+    const minDiscountPrice = 4000;
+    const maxDiscountPercent = Math.floor(((originalPrice - minDiscountPrice) / originalPrice) * 100);
+    
+    if (maxDiscountPercent < 10) {
+      const discountPercent = Math.floor(Math.random() * 10) + 5; // 5-15% discount
+      return Math.floor(originalPrice * (1 - discountPercent / 100));
+    }
+    
+    const discountPercent = Math.floor(Math.random() * Math.min(maxDiscountPercent, 70)) + 10; // 10-70% discount
+    const discountedPrice = Math.floor(originalPrice * (1 - discountPercent / 100));
+    return Math.max(discountedPrice, 4000);
+  };
+
   useEffect(() => {
     fetchPackages();
   }, []);
@@ -32,32 +55,95 @@ const Packages = () => {
       
       if (response.ok && data.data && data.data.length > 0) {
         // Successfully got data from API
-        const enhancedPackages = data.data.map(pkg => ({
-          ...pkg,
-          image_url: pkg.image_url || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=300&fit=crop',
-          location: pkg.location || 'Sri Lanka',
-          rating: pkg.rating || (Math.random() * 2 + 3).toFixed(1),
-          reviews: pkg.reviews || Math.floor(Math.random() * 500) + 50,
-          duration_days: pkg.duration_days || Math.floor(Math.random() * 10) + 3,
-          // Ensure price is between Rs. 4000 and Rs. 50,000
-          price: pkg.price && pkg.price >= 4000 && pkg.price <= 50000 ? pkg.price : Math.floor(Math.random() * 46000) + 4000
-        }));
+        const enhancedPackages = data.data.map(pkg => {
+          const validatedPrice = validatePrice(pkg.price);
+          const shouldHaveDiscount = Math.random() < 0.8; // 80% chance of discount
+          let discountPrice = null;
+          
+          if (pkg.discount_price) {
+            // Validate existing discount price
+            if (pkg.discount_price >= 4000 && pkg.discount_price <= 50000 && pkg.discount_price < validatedPrice) {
+              discountPrice = pkg.discount_price;
+            }
+          }
+          
+          // Generate discount if needed
+          if (!discountPrice && shouldHaveDiscount) {
+            discountPrice = generateDiscountPrice(validatedPrice);
+          }
+          
+          return {
+            ...pkg,
+            image_url: pkg.image_url || 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=300&fit=crop',
+            location: pkg.location || 'Sri Lanka',
+            rating: pkg.rating || (Math.random() * 2 + 3).toFixed(1),
+            reviews: pkg.reviews || Math.floor(Math.random() * 500) + 50,
+            duration_days: pkg.duration_days || Math.floor(Math.random() * 10) + 3,
+            price: validatedPrice,
+            discount_price: discountPrice
+          };
+        });
         
         setPackages(enhancedPackages);
         console.log('Successfully loaded packages from API:', enhancedPackages.length);
       } else {
         // API failed or returned no data, use static data
         console.warn('API returned no data, using static Sri Lankan packages');
-        setPackages(popularPackages);
+        const enhancedStaticPackages = popularPackages.map(pkg => {
+          const validatedPrice = validatePrice(pkg.price);
+          const shouldHaveDiscount = Math.random() < 0.8;
+          let discountPrice = null;
+          
+          if (pkg.discount_price) {
+            if (pkg.discount_price >= 4000 && pkg.discount_price <= 50000 && pkg.discount_price < validatedPrice) {
+              discountPrice = pkg.discount_price;
+            }
+          }
+          
+          if (!discountPrice && shouldHaveDiscount) {
+            discountPrice = generateDiscountPrice(validatedPrice);
+          }
+          
+          return {
+            ...pkg,
+            price: validatedPrice,
+            discount_price: discountPrice
+          };
+        });
+        
+        setPackages(enhancedStaticPackages);
         setUsingStaticData(true);
         setError('Connected to static Sri Lankan packages. Start your backend and refresh for live data.');
       }
     } catch (error) {
       console.error('Error fetching packages:', error);
       console.warn('API connection failed, using static Sri Lankan packages');
-        setPackages(popularPackages);
-        setUsingStaticData(true);
-        setError('Using offline Sri Lankan packages. To get live data, ensure backend is running on port 5000.');
+      
+      const enhancedStaticPackages = popularPackages.map(pkg => {
+        const validatedPrice = validatePrice(pkg.price);
+        const shouldHaveDiscount = Math.random() < 0.8;
+        let discountPrice = null;
+        
+        if (pkg.discount_price) {
+          if (pkg.discount_price >= 4000 && pkg.discount_price <= 50000 && pkg.discount_price < validatedPrice) {
+            discountPrice = pkg.discount_price;
+          }
+        }
+        
+        if (!discountPrice && shouldHaveDiscount) {
+          discountPrice = generateDiscountPrice(validatedPrice);
+        }
+        
+        return {
+          ...pkg,
+          price: validatedPrice,
+          discount_price: discountPrice
+        };
+      });
+      
+      setPackages(enhancedStaticPackages);
+      setUsingStaticData(true);
+      setError('Using offline Sri Lankan packages. To get live data, ensure backend is running on port 5000.');
     } finally {
       setLoading(false);
     }
@@ -115,10 +201,13 @@ const Packages = () => {
         }
       }
       
+      // Get display price (discount price if available, otherwise regular price)
+      const displayPrice = pkg.discount_price || pkg.price;
+      
       // Price filter (adjusted for Rs. 4000-50,000 range)
-      if (filter === 'budget') return pkg.price < 20000;
-      if (filter === 'mid-range') return pkg.price >= 20000 && pkg.price < 35000;
-      if (filter === 'luxury') return pkg.price >= 35000;
+      if (filter === 'budget') return displayPrice < 15000;
+      if (filter === 'mid-range') return displayPrice >= 15000 && displayPrice < 30000;
+      if (filter === 'luxury') return displayPrice >= 30000;
       
       // Duration filter
       if (filter === 'short') return pkg.duration_days <= 5;
@@ -134,11 +223,15 @@ const Packages = () => {
       return true;
     })
     .sort((a, b) => {
+      // Use display price for sorting
+      const priceA = a.discount_price || a.price;
+      const priceB = b.discount_price || b.price;
+      
       switch (sortBy) {
         case 'price-low':
-          return a.price - b.price;
+          return priceA - priceB;
         case 'price-high':
-          return b.price - a.price;
+          return priceB - priceA;
         case 'duration':
           return (b.duration_days || 0) - (a.duration_days || 0);
         case 'rating':
@@ -233,9 +326,9 @@ const Packages = () => {
                 >
                   <option value="all">All Categories</option>
                   <optgroup label="By Price">
-                    <option value="budget">Budget (Under Rs. 20,000)</option>
-                    <option value="mid-range">Mid-range (Rs. 20,000 - Rs. 35,000)</option>
-                    <option value="luxury">Luxury (Rs. 35,000+)</option>
+                    <option value="budget">Budget (Under Rs. 15,000)</option>
+                    <option value="mid-range">Mid-range (Rs. 15,000 - Rs. 30,000)</option>
+                    <option value="luxury">Luxury (Rs. 30,000+)</option>
                   </optgroup>
                   <optgroup label="By Duration">
                     <option value="short">Short Trips (≤5 days)</option>

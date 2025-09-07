@@ -23,7 +23,7 @@ export const popularPackages = [
   },
   {
     id: 2,
-    image_url: "/images/misty_ella1.jpg",
+    image_url: "/images/misty_ella.jpg",
     name: "Misty Mountains of Ella",
     description: "Discover tea plantations, Nine Arch Bridge, Little Adams Peak, and traditional tea factory tours in the hill country",
     location: "Ella, Uva Province",
@@ -44,7 +44,7 @@ export const popularPackages = [
   },
   {
     id: 3,
-    image_url: "/images/anu.jpg",
+    image_url: "/images/trinco.webp",
     name: "Cultural Triangle Explorer",
     description: "Explore ancient cities of Sigiriya Rock Fortress, Anuradhapura sacred city, and Polonnaruwa medieval capital",
     location: "Cultural Triangle",
@@ -108,7 +108,7 @@ export const popularPackages = [
   },
   {
     id: 6,
-    image_url: "/images/tea.jpg",
+    image_url: "/images/tea1.jpg",
     name: "Tea Country Experience",
     description: "Explore Nuwara Eliya tea plantations, Horton Plains World's End, cool mountain climate, and colonial heritage hotels",
     location: "Nuwara Eliya, Central Province",
@@ -151,7 +151,7 @@ export const popularPackages = [
   },
   {
     id: 8,
-    image_url: "/images/fort1.webp",
+    image_url: "/images/kandy1jpg",
     name: "Sacred City of Kandy",
     description: "Visit Temple of the Tooth Relic, Royal Botanical Gardens, traditional Kandyan dance, and Lake Kandy boat rides",
     location: "Kandy, Central Province",
@@ -173,7 +173,7 @@ export const popularPackages = [
   },
   {
     id: 9,
-    image_url: "/images/fort1.webp",
+    image_url: "/images/fort.jpg",
     name: "Ancient Fortress of Jaffna",
     description: "Explore rich Tamil culture, historic Jaffna Fort, Nallur Temple heritage, and island hopping tours",
     location: "Jaffna, Northern Province",
@@ -194,7 +194,7 @@ export const popularPackages = [
   },
   {
     id: 10,
-    image_url: "/images/trinco.webp",
+    image_url: "/images/trinco1.jpg",
     name: "Pristine Trincomalee",
     description: "Beautiful Nilaveli Beach, ancient Koneswaram Temple, whale watching cruises, and hot springs experience",
     location: "Trincomalee, Eastern Province",
@@ -237,7 +237,7 @@ export const popularPackages = [
   },
   {
     id: 12,
-    image_url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop",
+    image_url: "/images/yala.webp",
     name: "Sinharaja Rainforest Trek",
     description: "UNESCO Biosphere Reserve trekking with endemic wildlife, bird watching, and nature conservation experiences",
     location: "Sinharaja, Sabaragamuwa Province",

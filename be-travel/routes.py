@@ -142,6 +142,338 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
             if cur:
                 close_db_cursor(cur)
 
+    # BOOKINGS ROUTES - THIS WAS MISSING FROM YOUR ORIGINAL FILE
+    @app.route('/api/bookings', methods=['GET', 'POST', 'OPTIONS'])
+    def handle_bookings():
+        if request.method == 'OPTIONS':
+            return '', 200
+        elif request.method == 'GET':
+            return get_bookings()
+        else:
+            return create_booking()
+
+    def get_bookings():
+        cur = None
+        try:
+            cur = get_db_cursor()
+            
+            # Get query parameters for filtering
+            user_id = request.args.get('user_id')
+            status = request.args.get('status')
+            
+            query = """
+                SELECT b.*, t.name as tour_name, t.image_url as tour_image, 
+                       u.username, u.email as user_email
+                FROM bookings b
+                LEFT JOIN tours t ON b.tour_id = t.id
+                LEFT JOIN users u ON b.user_id = u.id
+                WHERE 1=1
+            """
+            params = []
+            
+            if user_id:
+                query += " AND b.user_id = %s"
+                params.append(user_id)
+            if status:
+                query += " AND b.status = %s"
+                params.append(status)
+                
+            query += " ORDER BY b.booking_date DESC"
+            
+            cur.execute(query, params)
+            bookings = cur.fetchall()
+            
+            return jsonify({
+                "status": "success",
+                "data": [dict(booking) for booking in bookings],
+                "count": len(bookings)
+            })
+            
+        except Exception as e:
+            logger.error(f"Error fetching bookings: {str(e)}")
+            return jsonify({
+                "status": "error",
+                "message": str(e)
+            }), 500
+        finally:
+            if cur:
+                close_db_cursor(cur)
+
+    def create_booking():
+        cur = None
+        try:
+            data = request.get_json()
+            logger.info(f"Received booking data: {json.dumps(data, indent=2, default=str)}")
+            
+            # Validate required fields
+            required_fields = ['tour_id', 'travel_date', 'guests', 'total_price', 
+                              'customer_name', 'customer_email', 'customer_phone', 'package_type']
+            
+            for field in required_fields:
+                if field not in data or data[field] is None:
+                    return jsonify({
+                        "status": "error",
+                        "message": f"Missing required field: {field}"
+                    }), 400
+            
+            # Validate email format
+            if not re.match(r"[^@]+@[^@]+\.[^@]+", data['customer_email']):
+                return jsonify({
+                    "status": "error",
+                    "message": "Invalid email format"
+                }), 400
+            
+            # Validate travel date
+            try:
+                travel_date = datetime.strptime(data['travel_date'], '%Y-%m-%d').date()
+                if travel_date < datetime.now().date():
+                    return jsonify({
+                        "status": "error",
+                        "message": "Travel date cannot be in the past"
+                    }), 400
+            except ValueError:
+                return jsonify({
+                    "status": "error",
+                    "message": "Invalid date format. Use YYYY-MM-DD"
+                }), 400
+            
+            # Validate numeric fields
+            try:
+                guests = int(data['guests'])
+                total_price = float(data['total_price'])
+                tour_id = int(data['tour_id'])
+                
+                if guests < 1 or guests > 50:
+                    return jsonify({
+                        "status": "error",
+                        "message": "Number of guests must be between 1 and 50"
+                    }), 400
+                
+                if total_price < 0:
+                    return jsonify({
+                        "status": "error",
+                        "message": "Total price cannot be negative"
+                    }), 400
+                    
+            except (ValueError, TypeError) as e:
+                return jsonify({
+                    "status": "error",
+                    "message": f"Invalid numeric data: {str(e)}"
+                }), 400
+            
+            cur = get_db_cursor()
+            
+            # Verify tour exists
+            cur.execute("SELECT id, name, price FROM tours WHERE id = %s", (tour_id,))
+            tour = cur.fetchone()
+            if not tour:
+                return jsonify({
+                    "status": "error",
+                    "message": f"Tour with ID {tour_id} not found"
+                }), 404
+            
+            # Get user_id if authenticated
+            user_id = None
+            auth_header = request.headers.get('Authorization')
+            if auth_header and auth_header.startswith('Bearer '):
+                try:
+                    token = auth_header.split(" ")[1]
+                    token_data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+                    user_id = token_data['user_id']
+                    
+                    # Verify user exists
+                    cur.execute("SELECT id FROM users WHERE id = %s", (user_id,))
+                    if not cur.fetchone():
+                        user_id = None
+                except jwt.InvalidTokenError:
+                    user_id = None
+            
+            # Insert booking
+            cur.execute("""
+                INSERT INTO bookings 
+                (user_id, tour_id, travel_date, guests, total_price, customer_name, 
+                 customer_email, customer_phone, special_requests, package_type, 
+                 preferred_star_rating, number_of_children, status)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, (
+                user_id,
+                tour_id,
+                travel_date,
+                guests,
+                total_price,
+                data['customer_name'],
+                data['customer_email'],
+                data['customer_phone'],
+                data.get('special_requests', ''),
+                data['package_type'],
+                data.get('preferred_star_rating', 3),
+                data.get('number_of_children', 0),
+                'pending'
+            ))
+            
+            booking_id = cur.lastrowid
+            mysql.connection.commit()
+            
+            # Fetch the created booking with tour info
+            cur.execute("""
+                SELECT b.*, t.name as tour_name, t.image_url as tour_image, t.description as tour_description
+                FROM bookings b
+                LEFT JOIN tours t ON b.tour_id = t.id
+                WHERE b.id = %s
+            """, (booking_id,))
+            created_booking = cur.fetchone()
+            
+            logger.info(f"Booking created successfully with ID: {booking_id}")
+            
+            return jsonify({
+                "status": "success",
+                "message": "Booking created successfully! We will contact you within 24 hours to confirm your Sri Lankan adventure.",
+                "data": {
+                    "id": booking_id,
+                    "booking_details": dict(created_booking)
+                }
+            }), 201
+            
+        except Exception as e:
+            logger.error(f"Error creating booking: {str(e)}")
+            if cur:
+                mysql.connection.rollback()
+            return jsonify({
+                "status": "error",
+                "message": f"Failed to create booking: {str(e)}"
+            }), 500
+        finally:
+            if cur:
+                close_db_cursor(cur)
+
+    @app.route('/api/bookings/<int:booking_id>', methods=['GET', 'PUT', 'DELETE'])
+    def handle_booking_by_id(booking_id):
+        if request.method == 'GET':
+            return get_booking_by_id(booking_id)
+        elif request.method == 'PUT':
+            return update_booking(booking_id)
+        else:
+            return delete_booking(booking_id)
+
+    def get_booking_by_id(booking_id):
+        cur = None
+        try:
+            cur = get_db_cursor()
+            cur.execute("""
+                SELECT b.*, t.name as tour_name, t.image_url as tour_image, t.description as tour_description,
+                       u.username, u.email as user_email
+                FROM bookings b
+                LEFT JOIN tours t ON b.tour_id = t.id
+                LEFT JOIN users u ON b.user_id = u.id
+                WHERE b.id = %s
+            """, (booking_id,))
+            booking = cur.fetchone()
+            
+            if not booking:
+                return jsonify({
+                    "status": "error",
+                    "message": "Booking not found"
+                }), 404
+            
+            return jsonify({
+                "status": "success",
+                "data": dict(booking)
+            })
+            
+        except Exception as e:
+            logger.error(f"Error fetching booking: {str(e)}")
+            return jsonify({
+                "status": "error",
+                "message": str(e)
+            }), 500
+        finally:
+            if cur:
+                close_db_cursor(cur)
+
+    def update_booking(booking_id):
+        cur = None
+        try:
+            data = request.get_json()
+            
+            if 'status' not in data:
+                return jsonify({
+                    "status": "error",
+                    "message": "Status is required"
+                }), 400
+            
+            valid_statuses = ['pending', 'confirmed', 'cancelled']
+            if data['status'] not in valid_statuses:
+                return jsonify({
+                    "status": "error",
+                    "message": f"Invalid status. Must be one of: {', '.join(valid_statuses)}"
+                }), 400
+            
+            cur = get_db_cursor()
+            
+            # Check if booking exists
+            cur.execute("SELECT id FROM bookings WHERE id = %s", (booking_id,))
+            if not cur.fetchone():
+                return jsonify({
+                    "status": "error",
+                    "message": "Booking not found"
+                }), 404
+            
+            # Update status
+            cur.execute("""
+                UPDATE bookings 
+                SET status = %s, booking_date = booking_date 
+                WHERE id = %s
+            """, (data['status'], booking_id))
+            
+            mysql.connection.commit()
+            
+            return jsonify({
+                "status": "success",
+                "message": "Booking status updated successfully"
+            })
+            
+        except Exception as e:
+            logger.error(f"Error updating booking: {str(e)}")
+            return jsonify({
+                "status": "error",
+                "message": str(e)
+            }), 500
+        finally:
+            if cur:
+                close_db_cursor(cur)
+
+    def delete_booking(booking_id):
+        cur = None
+        try:
+            cur = get_db_cursor()
+            
+            # Check if booking exists
+            cur.execute("SELECT id FROM bookings WHERE id = %s", (booking_id,))
+            if not cur.fetchone():
+                return jsonify({
+                    "status": "error",
+                    "message": "Booking not found"
+                }), 404
+            
+            # Delete booking
+            cur.execute("DELETE FROM bookings WHERE id = %s", (booking_id,))
+            mysql.connection.commit()
+            
+            return jsonify({
+                "status": "success",
+                "message": "Booking deleted successfully"
+            })
+            
+        except Exception as e:
+            logger.error(f"Error deleting booking: {str(e)}")
+            return jsonify({
+                "status": "error",
+                "message": str(e)
+            }), 500
+        finally:
+            if cur:
+                close_db_cursor(cur)
+
     # Guides Routes
     @app.route('/api/guides', methods=['GET'])
     def get_guides():
@@ -416,7 +748,7 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
             if cur:
                 close_db_cursor(cur)
 
-    # Seed guides data - CENTRALIZED GUIDE DATA with UNIQUE images
+    # Seed guides data
     @app.route('/api/seed-guides', methods=['GET'])
     def seed_guides():
         cur = None
@@ -427,91 +759,90 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
             cur.execute("DELETE FROM guides")
             logger.info("Cleared existing guides")
             
-            # CENTRALIZED Sri Lankan guides data with UNIQUE image paths
             guides_data = [
                 {
                     'name': 'Chaminda Perera',
                     'specialty': 'Cultural Heritage Tours',
                     'experience': '12 years',
                     'rating': 4.9,
-                    'languages': ['English', 'Sinhala', 'Tamil'],
+                    'languages': ['Tamil', 'English', 'Sinhala'],
                     'image_url': '/images/guide1.webp',
-                    'bio': 'Born in Kandy, expert in Buddhist history and UNESCO World Heritage sites. Specializes in Cultural Triangle tours.',
+                    'bio': 'Born in Kandy, expert in Buddhist history and UNESCO World Heritage sites. Specializes in Cultural Triangle tours including Sigiriya, Dambulla, and Anuradhapura.',
                     'tours_completed': 485,
-                    'specialities': ['Sigiriya & Dambulla', 'Kandy Temple Tours', 'Ancient Kingdoms'],
+                    'specialities': ['Sigiriya & Dambulla', 'Kandy Temple Tours', 'Ancient Kingdoms', 'UNESCO Sites'],
                     'phone': '+94 77 123 4567',
                     'email': 'chaminda@srilankaguides.com',
-                    'price_range': 'Rs. 4,000-8,000/day'
+                    'price_range': 'Rs.4,000-8,000/day'
                 },
                 {
                     'name': 'Nimal Fernando',
                     'specialty': 'Wildlife & Nature Tours',
                     'experience': '15 years',
                     'rating': 4.95,
-                    'languages': ['English', 'Sinhala'],
+                    'languages': ['Tamil', 'English', 'Sinhala'],
                     'image_url': '/images/guide7.jpg',
-                    'bio': 'Wildlife biologist and safari guide with deep knowledge of Yala, Udawalawe and leopard behavior patterns.',
+                    'bio': 'Wildlife biologist and safari guide with deep knowledge of Yala, Udawalawe and leopard behavior patterns. Expert in bird watching and conservation.',
                     'tours_completed': 520,
-                    'specialities': ['Leopard Safaris', 'Elephant Watching', 'Bird Photography'],
+                    'specialities': ['Leopard Safaris', 'Elephant Watching', 'Bird Photography', 'Conservation Tours'],
                     'phone': '+94 71 987 6543',
                     'email': 'nimal@wildlifeguides.lk',
-                    'price_range': 'Rs. 4,000-8,000/day'
+                    'price_range': 'Rs.5,000-8,000/day'
                 },
                 {
                     'name': 'Priya Wickramasinghe',
                     'specialty': 'Tea Country & Hill Station Tours',
                     'experience': '8 years',
                     'rating': 4.88,
-                    'languages': ['English', 'Sinhala'],
+                    'languages': ['Tamil', 'English', 'Sinhala'],
                     'image_url': '/images/guide12.webp',
-                    'bio': 'Tea plantation heritage expert from Nuwara Eliya, specializing in Ceylon tea history and hill country adventures.',
+                    'bio': 'Tea plantation heritage expert from Nuwara Eliya, specializing in Ceylon tea history and hill country adventures. Third-generation tea planter family.',
                     'tours_completed': 320,
-                    'specialities': ['Tea Factory Tours', 'Ella & Nine Arches', 'Mountain Trekking'],
+                    'specialities': ['Tea Factory Tours', 'Ella & Nine Arches', 'Mountain Trekking', 'Colonial Heritage'],
                     'phone': '+94 76 555 2468',
                     'email': 'priya@teacountryguides.com',
-                    'price_range': 'Rs. 4,000-8,000/day'
+                    'price_range': 'Rs.4,000-6,500/day'
                 },
                 {
                     'name': 'Ruwan Jayasuriya',
                     'specialty': 'Coastal & Adventure Tours',
                     'experience': '10 years',
                     'rating': 4.92,
-                    'languages': ['English', 'Sinhala', 'Tamil'],
+                    'languages': ['Tamil', 'English', 'Sinhala'],
                     'image_url': '/images/guide14.webp',
-                    'bio': 'Certified diving instructor and marine conservation advocate. Expert in southern coast attractions and whale watching.',
+                    'bio': 'Certified diving instructor and marine conservation advocate. Expert in southern coast attractions and whale watching. PADI certified with marine biology background.',
                     'tours_completed': 410,
-                    'specialities': ['Whale Watching', 'Surfing Lessons', 'Coastal Heritage'],
+                    'specialities': ['Whale Watching', 'Surfing Lessons', 'Coastal Heritage', 'Marine Conservation'],
                     'phone': '+94 75 333 7890',
                     'email': 'ruwan@coastalguides.lk',
-                    'price_range': 'Rs. 4,000-8,000/day'
+                    'price_range': 'Rs.5,500-8,000/day'
                 },
                 {
                     'name': 'Kumari Silva',
                     'specialty': 'Culinary & Village Tours',
                     'experience': '6 years',
                     'rating': 4.87,
-                    'languages': ['English', 'Sinhala', 'Tamil'],
+                    'languages': ['Tamil', 'English', 'Sinhala'],
                     'image_url': '/images/guide5.webp',
-                    'bio': 'Traditional Sri Lankan chef and cultural ambassador. Offers authentic village experiences and cooking classes.',
+                    'bio': 'Traditional Sri Lankan chef and cultural ambassador. Offers authentic village experiences and cooking classes. Expert in regional cuisines from all provinces.',
                     'tours_completed': 285,
-                    'specialities': ['Spice Garden Tours', 'Traditional Cooking', 'Village Experiences'],
+                    'specialities': ['Spice Garden Tours', 'Traditional Cooking', 'Village Experiences', 'Local Markets'],
                     'phone': '+94 78 444 1357',
                     'email': 'kumari@culinaryguides.com',
-                    'price_range': 'Rs. 4,000-8,000/day'
+                    'price_range': 'Rs.4,000-6,000/day'
                 },
                 {
                     'name': 'Mahinda Rathnayake',
                     'specialty': 'Adventure & Pilgrimage Tours',
                     'experience': '14 years',
                     'rating': 4.91,
-                    'languages': ['English', 'Sinhala'],
-                    'image_url': '/images/guide6.jpg',
-                    'bio': 'Mountain guide and meditation practitioner. Specializes in Adam\'s Peak pilgrimages and spiritual journeys.',
+                    'languages': ['Tamil', 'English', 'Sinhala'],
+                    'image_url': '/images/guide8.jpeg',
+                    'bio': 'Mountain guide and meditation practitioner. Specializes in Adam\'s Peak pilgrimages and spiritual journeys. Licensed mountain climbing instructor.',
                     'tours_completed': 465,
-                    'specialities': ['Adam\'s Peak Climb', 'Meditation Retreats', 'Sacred Sites'],
+                    'specialities': ['Adam\'s Peak Climb', 'Meditation Retreats', 'Sacred Sites', 'Mountain Adventures'],
                     'phone': '+94 77 666 9012',
                     'email': 'mahinda@pilgrimguides.lk',
-                    'price_range': 'Rs. 4,000-8,000/day'
+                    'price_range': 'Rs.4,500-7,000/day'
                 }
             ]
             
@@ -547,7 +878,7 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
             
             return jsonify({
                 "status": "success",
-                "message": f"Sri Lankan guides seeded successfully! Added {count} professional guides with English, Tamil, and Sinhala language support.",
+                "message": f"Sri Lankan guides seeded successfully! Added {count} professional guides with Tamil, English, and Sinhala language support.",
                 "guides_added": count
             })
             
@@ -856,22 +1187,22 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
             cur.execute("DELETE FROM tours")
             logger.info("Cleared existing tours")
             
-            # Insert 12 Sri Lankan destinations
+            # Insert 12 Sri Lankan destinations with local image URLs
             cur.execute("""
                 INSERT INTO tours (name, description, price, duration_days, tour_type, image_url)
                 VALUES 
-                    ('Pristine Beaches of Mirissa', 'Experience whale watching and pristine beaches in southern Sri Lanka with beachfront villa stay and stilt fishing experiences', 850.00, 5, 'Beach', 'https://images.unsplash.com/photo-1544735716-392fe2489ffa'),
-                    ('Misty Mountains of Ella', 'Discover tea plantations, Nine Arch Bridge, Little Adams Peak, and traditional tea factory tours in the hill country', 650.00, 6, 'Hill Country', 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4'),
-                    ('Cultural Triangle Explorer', 'Explore ancient cities of Sigiriya Rock Fortress, Anuradhapura sacred city, and Polonnaruwa medieval capital', 1200.00, 8, 'Cultural', 'https://images.unsplash.com/photo-1539650116574-75c0c6d0ec5c'),
-                    ('Sacred City of Kandy', 'Visit Temple of the Tooth Relic, Royal Botanical Gardens, traditional Kandyan dance, and Lake Kandy boat rides', 520.00, 4, 'Cultural', 'https://images.unsplash.com/photo-1578662996442-48f60103fc96'),
-                    ('Wildlife Safari Adventure', 'Leopard spotting in Yala National Park with luxury safari camping, elephant orphanage, and bird watching tours', 800.00, 5, 'Wildlife', 'https://images.unsplash.com/photo-1549366021-9f761d040a94'),
-                    ('Tea Country Experience', 'Explore Nuwara Eliya tea plantations, Horton Plains World''s End, cool mountain climate, and colonial heritage hotels', 550.00, 4, 'Hill Country', 'https://images.unsplash.com/photo-1578662996442-48f60103fc96'),
-                    ('Golden Beaches of Arugam Bay', 'World-class surfing destination with beach bungalow accommodation, Kumana Bird Sanctuary, and fresh seafood dining', 680.00, 6, 'Beach', 'https://images.unsplash.com/photo-1544735716-392fe2489ffa'),
-                    ('Ancient Fortress of Jaffna', 'Explore rich Tamil culture, historic Jaffna Fort, Nallur Temple heritage, and island hopping tours', 600.00, 5, 'Cultural', 'https://images.unsplash.com/photo-1539650116574-75c0c6d0ec5c'),
-                    ('Pristine Trincomalee', 'Beautiful Nilaveli Beach, ancient Koneswaram Temple, whale watching cruises, and hot springs experience', 720.00, 6, 'Beach', 'https://images.unsplash.com/photo-1544735716-392fe2489ffa'),
-                    ('Galle Dutch Fort Heritage', 'UNESCO World Heritage colonial fort with cobblestone streets, rampart walks, and ocean views', 480.00, 3, 'Heritage', 'https://images.unsplash.com/photo-1578662996442-48f60103fc96'),
-                    ('Tropical Paradise Unawatuna', 'Palm-fringed beaches, coral reef snorkeling, sunset catamaran cruises, and beachfront relaxation', 750.00, 7, 'Beach', 'https://images.unsplash.com/photo-1544735716-392fe2489ffa'),
-                    ('Sinharaja Rainforest Trek', 'UNESCO Biosphere Reserve trekking with endemic wildlife, bird watching, and nature conservation experiences', 580.00, 4, 'Nature', 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e')
+                    ('Pristine Beaches of Mirissa', 'Experience whale watching and pristine beaches in southern Sri Lanka with beachfront villa stay and stilt fishing experiences', 850.00, 5, 'Beach', '/images/mirrisa1.jpg'),
+                    ('Misty Mountains of Ella', 'Discover tea plantations, Nine Arch Bridge, Little Adams Peak, and traditional tea factory tours in the hill country', 650.00, 6, 'Hill Country', '/images/misty_ella.jpg'),
+                    ('Cultural Triangle Explorer', 'Explore ancient cities of Sigiriya Rock Fortress, Anuradhapura sacred city, and Polonnaruwa medieval capital', 1200.00, 8, 'Cultural', '/images/trinco.webp'),
+                    ('Sacred City of Kandy', 'Visit Temple of the Tooth Relic, Royal Botanical Gardens, traditional Kandyan dance, and Lake Kandy boat rides', 520.00, 4, 'Cultural', '/images/kandy1.jpg'),
+                    ('Wildlife Safari Adventure', 'Leopard spotting in Yala National Park with luxury safari camping, elephant orphanage, and bird watching tours', 800.00, 5, 'Wildlife', '/images/safari.jpg'),
+                    ('Tea Country Experience', 'Explore Nuwara Eliya tea plantations, Horton Plains World''s End, cool mountain climate, and colonial heritage hotels', 550.00, 4, 'Hill Country', '/images/tea1.jpg'),
+                    ('Golden Beaches of Arugam Bay', 'World-class surfing destination with beach bungalow accommodation, Kumana Bird Sanctuary, and fresh seafood dining', 680.00, 6, 'Beach', '/images/arugam1.webp'),
+                    ('Ancient Fortress of Jaffna', 'Explore rich Tamil culture, historic Jaffna Fort, Nallur Temple heritage, and island hopping tours', 600.00, 5, 'Cultural', '/images/fort.jpg'),
+                    ('Pristine Trincomalee', 'Beautiful Nilaveli Beach, ancient Koneswaram Temple, whale watching cruises, and hot springs experience', 720.00, 6, 'Beach', '/images/trinco1.jpg'),
+                    ('Galle Dutch Fort Heritage', 'UNESCO World Heritage colonial fort with cobblestone streets, rampart walks, and ocean views', 480.00, 3, 'Heritage', '/images/galle.jpg'),
+                    ('Tropical Paradise Unawatuna', 'Palm-fringed beaches, coral reef snorkeling, sunset catamaran cruises, and beachfront relaxation', 750.00, 7, 'Beach', '/images/unawatuna1.webp'),
+                    ('Sinharaja Rainforest Trek', 'UNESCO Biosphere Reserve trekking with endemic wildlife, bird watching, and nature conservation experiences', 580.00, 4, 'Nature', '/images/yala.webp')
             """)
             
             mysql.connection.commit()
@@ -941,4 +1272,38 @@ def register_routes(app, mysql, ai_models, recommender, pricing_optimizer, chatb
             return jsonify({
                 "status": "error",
                 "message": str(e)
+            }), 500
+
+    # Chatbot endpoint for travel assistance
+    @app.route('/api/chat', methods=['POST', 'OPTIONS'])
+    def chat_with_bot():
+        if request.method == 'OPTIONS':
+            return '', 200
+            
+        try:
+            data = request.get_json()
+            
+            if 'message' not in data:
+                return jsonify({
+                    "status": "error",
+                    "message": "Message is required"
+                }), 400
+            
+            user_message = data['message']
+            bot_response = chatbot.get_response(user_message)
+            
+            return jsonify({
+                "status": "success",
+                "data": {
+                    "user_message": user_message,
+                    "bot_response": bot_response,
+                    "timestamp": datetime.now().isoformat()
+                }
+            })
+            
+        except Exception as e:
+            logger.error(f"Chat error: {str(e)}")
+            return jsonify({
+                "status": "error",
+                "message": f"Chat service error: {str(e)}"
             }), 500

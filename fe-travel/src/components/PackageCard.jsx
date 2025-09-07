@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StarIcon, MapPinIcon, HeartIcon, ClockIcon, ExclamationTriangleIcon, SparklesIcon } from '@heroicons/react/24/solid';
 import { useAuth } from '../context/AuthContext';
@@ -6,51 +6,18 @@ import { useAuth } from '../context/AuthContext';
 const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, isRecommended = false }) => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const [optimalPrice, setOptimalPrice] = useState(null);
-  const [isLoadingPrice, setIsLoadingPrice] = useState(false);
 
   // Default values and helpers
   const getDefaultValue = (value, fallback) => value !== undefined ? value : fallback;
   const getRandomDays = () => Math.floor(Math.random() * 14) + 1;
-  const getRandomPrice = () => Math.floor(Math.random() * 46000) + 4000; // Prices between Rs. 4000 and Rs. 50,000
-
-  useEffect(() => {
-    // Fetch optimal price when component mounts if we have backend data
-    if (packageItem.id && packageItem.price && !packageItem.discount_price) {
-      calculateOptimalPrice();
-    }
-  }, [packageItem]);
-
-  const calculateOptimalPrice = async () => {
-    setIsLoadingPrice(true);
-    try {
-      // Use a future date for price calculation (30 days from now)
-      const futureDate = new Date();
-      futureDate.setDate(futureDate.getDate() + 30);
-      const travelDate = futureDate.toISOString().split('T')[0];
-      
-      const response = await fetch('http://localhost:5000/api/ai-pricing', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          tour_id: packageItem.id,
-          travel_date: travelDate,
-          guests: 2
-        })
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        setOptimalPrice(data.data);
-      }
-    // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      console.log('AI pricing not available, using standard pricing');
-    } finally {
-      setIsLoadingPrice(false);
-    }
+  // Updated price range: Rs. 4000 to Rs. 50000
+  const getRandomPrice = () => Math.floor(Math.random() * 46000) + 4000;
+  
+  // Generate discount pricing (30-90% off)
+  const generateDiscountPrice = (originalPrice) => {
+    const discountPercent = Math.floor(Math.random() * 61) + 30; // 30-90% discount
+    const discountedPrice = Math.floor(originalPrice * (1 - discountPercent / 100));
+    return Math.max(discountedPrice, 999); // Minimum price Rs. 999
   };
 
   if (showError || !packageItem) {
@@ -80,10 +47,32 @@ const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, is
     reviews = getDefaultValue(packageItem.reviews, Math.floor(Math.random() * 1000)),
     duration_days = getDefaultValue(packageItem.duration_days, getRandomDays()),
     is_wishlisted = false,
-    price = getDefaultValue(packageItem.price, getRandomPrice()),
-    discount_price = packageItem.discount_price,
     tour_type = packageItem.tour_type || "Adventure"
   } = packageItem;
+
+  // Validate price is within range, if not, generate a new one
+  const originalPrice = packageItem.price && packageItem.price >= 4000 && packageItem.price <= 50000 
+    ? packageItem.price 
+    : getRandomPrice();
+  
+  // Generate discount price if not provided (80% of packages will have discounts)
+  const shouldHaveDiscount = !packageItem.discount_price && Math.random() < 0.8;
+  let discountPrice = packageItem.discount_price;
+  
+  // If discount price exists, validate it's within range
+  if (discountPrice && (discountPrice < 4000 || discountPrice > 50000)) {
+    discountPrice = null; // Reset if outside range
+  }
+  
+  // Generate discount price if needed and ensure it's within range
+  if (!discountPrice && shouldHaveDiscount) {
+    discountPrice = generateDiscountPrice(originalPrice);
+  }
+  
+  // Final validation: ensure discount price is within range and less than original
+  if (discountPrice && (discountPrice < 4000 || discountPrice >= originalPrice)) {
+    discountPrice = null;
+  }
 
   const handleBookNow = (e) => {
     e.stopPropagation();
@@ -95,17 +84,15 @@ const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, is
       rating: parseFloat(rating),
       reviews,
       duration_days,
-      price: discount_price || price,
-      original_price: price,
+      price: discountPrice || originalPrice,
+      original_price: originalPrice,
       image_url,
       is_wishlisted,
       packageType: 'standard',
       tour_type
     };
-
     localStorage.removeItem('currentBooking');
     localStorage.setItem('currentBooking', JSON.stringify(bookingData));
-
     navigate('/booking', {
       state: {
         package: bookingData,
@@ -129,12 +116,11 @@ const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, is
     return `Rs. ${new Intl.NumberFormat('en-US').format(Math.round(amount))}`;
   };
 
-  const discountPercentage = discount_price
-    ? Math.round((1 - discount_price / price) * 100)
+  const discountPercentage = discountPrice
+    ? Math.round((1 - discountPrice / originalPrice) * 100)
     : 0;
 
-  const displayPrice = optimalPrice?.final_price || (discount_price || price);
-  const originalPrice = optimalPrice?.base_price || price;
+  const displayPrice = discountPrice || originalPrice;
 
   return (
     <div
@@ -164,7 +150,12 @@ const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, is
           alt={name}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           onError={(e) => {
+            console.log(`Image failed to load: ${image_url}`);
+            console.log('Trying fallback image...');
             e.target.src = "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=300&fit=crop";
+          }}
+          onLoad={() => {
+            console.log(`Image loaded successfully: ${image_url}`);
           }}
           loading="lazy"
         />
@@ -200,7 +191,7 @@ const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, is
 
         <div className="flex justify-between items-center mt-auto">
           <div className="flex flex-col">
-            {discount_price || (optimalPrice && optimalPrice.final_price !== originalPrice) ? (
+            {discountPrice ? (
               <>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-bold text-blue-700">
@@ -211,23 +202,13 @@ const PackageCard = ({ packageItem = {}, onWishlistToggle, showError = false, is
                   </span>
                 </div>
                 <span className="text-sm font-semibold text-green-600 bg-green-100 px-2 py-1 rounded-full mt-1">
-                  {discount_price 
-                    ? `Save ${discountPercentage}%` 
-                    : 'AI Optimized Price'
-                  }
+                  Save {discountPercentage}%
                 </span>
               </>
             ) : (
-              <>
-                <span className="text-3xl font-bold text-blue-700">
-                  {isLoadingPrice ? 'Calculating...' : formatPrice(displayPrice)}
-                </span>
-                {optimalPrice && (
-                  <span className="text-xs text-gray-500">
-                    AI optimized pricing
-                  </span>
-                )}
-              </>
+              <span className="text-3xl font-bold text-blue-700">
+                {formatPrice(displayPrice)}
+              </span>
             )}
           </div>
           <button

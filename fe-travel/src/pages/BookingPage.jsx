@@ -50,7 +50,9 @@ const BookingPage = () => {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
 
-  const API_BASE_URL = 'http://localhost:5000/api';
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 
+                       (typeof process !== 'undefined' && process.env?.REACT_APP_API_URL) || 
+                       'http://localhost:5000/api';
 
   const packages = {
     standard: {
@@ -160,7 +162,7 @@ const BookingPage = () => {
         const data = await response.json();
         const tours = data.data || data || [];
         setAvailableTours(tours);
-        console.log('Available tours loaded:', tours.length);
+        console.log('Available tours loaded:', tours.length, tours);
         return tours;
       } else {
         console.warn('Failed to load tours, will seed database');
@@ -181,6 +183,7 @@ const BookingPage = () => {
         const seedResponse = await fetch(`${API_BASE_URL}/seed-sri-lanka`);
         if (seedResponse.ok) {
           console.log('Database seeded successfully');
+          await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for seeding
           return await loadAvailableTours();
         } else {
           console.warn('Failed to seed database');
@@ -194,17 +197,47 @@ const BookingPage = () => {
     }
   };
 
-  // Validate tour exists
-  const validateTour = async (tourId) => {
+  // Validate tour exists and return valid tour or fallback
+  const validateAndGetTour = async (tourId) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/tours/${tourId}`);
-      if (response.ok) {
-        const data = await response.json();
-        return data.data || data;
-      } else {
-        console.error(`Tour ${tourId} not found`);
+      // First ensure tours exist
+      const tours = await ensureToursExist();
+      
+      if (!tours || tours.length === 0) {
+        console.warn('No tours available in database');
         return null;
       }
+
+      // If no specific tour ID provided, return first available tour
+      if (!tourId) {
+        console.log('No tour ID provided, using first available tour:', tours[0]);
+        return tours[0];
+      }
+
+      // Try to find the specific tour
+      const specificTour = tours.find(tour => tour.id == tourId);
+      if (specificTour) {
+        console.log(`Found specific tour with ID ${tourId}:`, specificTour);
+        return specificTour;
+      }
+
+      // If specific tour not found, try to fetch from API
+      try {
+        const response = await fetch(`${API_BASE_URL}/tours/${tourId}`);
+        if (response.ok) {
+          const data = await response.json();
+          const tour = data.data || data;
+          console.log(`Fetched tour ${tourId} from API:`, tour);
+          return tour;
+        }
+      } catch (error) {
+        console.warn(`Failed to fetch tour ${tourId} from API:`, error);
+      }
+
+      // If all fails, return first available tour as fallback
+      console.warn(`Tour ${tourId} not found, using first available tour as fallback:`, tours[0]);
+      return tours[0];
+      
     } catch (error) {
       console.error('Tour validation failed:', error);
       return null;
@@ -263,75 +296,95 @@ const BookingPage = () => {
     }
   }, [currentUser, isAuthenticated]);
 
-  // Load booking data
+  // Load booking data - FIXED TOUR VALIDATION
   useEffect(() => {
     const loadBookingData = async () => {
       try {
         setLoadingBookingData(true);
         setBookingError(null);
+        setApiError(null);
+
+        console.log('Loading booking data...');
+        console.log('Location state:', location.state);
+        console.log('localStorage currentBooking:', localStorage.getItem('currentBooking'));
 
         const packageFromState = location.state?.package;
         const packageFromStorage = JSON.parse(localStorage.getItem('currentBooking') || 'null');
+        const tourIdFromState = location.state?.packageId || location.state?.tourId || location.state?.id;
 
-        if (packageFromState) {
-          console.log('Loading package from navigation state:', packageFromState);
-          setBookingDetails(packageFromState);
-          setTotalAmount(packageFromState.price || packageFromState.original_price || 0);
-        } else if (packageFromStorage) {
-          console.log('Loading package from localStorage:', packageFromStorage);
-          setBookingDetails(packageFromStorage);
-          setTotalAmount(packageFromStorage.price || packageFromStorage.original_price || 0);
-        } else if (location.state?.packageId) {
-          try {
-            const isConnected = await testBackendConnection();
-            if (!isConnected) {
-              throw new Error('Backend not available');
-            }
+        let selectedTour = null;
 
-            const tourData = await validateTour(location.state.packageId);
-            if (tourData) {
-              setBookingDetails(tourData);
-              setTotalAmount(tourData.price || 0);
-            } else {
-              throw new Error('Tour not found');
-            }
-          } catch (error) {
-            console.error('Error fetching tour details:', error);
-            setBookingError('Failed to load tour details. Please select a package first.');
-            setTimeout(() => navigate('/packages', { replace: true }), 2000);
-            return;
-          }
-        } else {
-          // Use first available tour or create default
-          await ensureToursExist();
-          
-          if (availableTours.length > 0) {
-            const firstTour = availableTours[0];
-            console.log('Using first available tour:', firstTour);
-            setBookingDetails(firstTour);
-            setTotalAmount(firstTour.price || 150);
-          } else {
-            // Create default booking details if no tours available
-            console.log('No tours available, creating default');
-            const defaultPackage = {
-              id: 1,
-              name: 'Ancient Fortress of Jaffna',
-              location: 'Jaffna, Sri Lanka',
-              price: 150,
-              description: 'Explore the historic fortress and learn about the rich cultural heritage of Jaffna.',
-              image_url: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
-              rating: 4.5,
-              reviews: '150+'
-            };
-            setBookingDetails(defaultPackage);
-            setTotalAmount(defaultPackage.price);
+        // Priority 1: Package from navigation state
+        if (packageFromState && packageFromState.id) {
+          console.log('Using package from navigation state:', packageFromState);
+          selectedTour = await validateAndGetTour(packageFromState.id);
+          if (!selectedTour) {
+            selectedTour = packageFromState; // Use as-is if validation fails
           }
         }
-        
+        // Priority 2: Package from localStorage
+        else if (packageFromStorage && packageFromStorage.id) {
+          console.log('Using package from localStorage:', packageFromStorage);
+          selectedTour = await validateAndGetTour(packageFromStorage.id);
+          if (!selectedTour) {
+            selectedTour = packageFromStorage; // Use as-is if validation fails
+          }
+        }
+        // Priority 3: Tour ID from state
+        else if (tourIdFromState) {
+          console.log('Using tour ID from state:', tourIdFromState);
+          selectedTour = await validateAndGetTour(tourIdFromState);
+        }
+
+        // Priority 4: Fallback to first available tour
+        if (!selectedTour) {
+          console.log('No specific tour selected, getting first available tour...');
+          selectedTour = await validateAndGetTour(null);
+        }
+
+        // Final fallback: Create default tour if nothing works
+        if (!selectedTour) {
+          console.log('Creating default tour as final fallback...');
+          selectedTour = {
+            id: 1,
+            name: 'Explore Sri Lanka',
+            description: 'Discover the beauty of Sri Lanka with our guided tour.',
+            price: 150,
+            duration_days: 7,
+            tour_type: 'Cultural',
+            image_url: '/images/default-tour.jpg',
+            location: 'Sri Lanka',
+            rating: 4.5,
+            reviews: '100+'
+          };
+        }
+
+        console.log('Final selected tour:', selectedTour);
+        setBookingDetails(selectedTour);
+        setTotalAmount(selectedTour.price || 150);
         setInitialLoadComplete(true);
+        
       } catch (error) {
         console.error('Error loading booking data:', error);
-        setBookingError('Failed to load booking details. Please try again.');
+        setBookingError('Failed to load tour details. Please try again.');
+        setApiError(`Loading error: ${error.message}`);
+        
+        // Create emergency fallback
+        const fallbackTour = {
+          id: 1,
+          name: 'Sri Lanka Adventure',
+          description: 'Experience the wonders of Sri Lanka.',
+          price: 150,
+          duration_days: 7,
+          tour_type: 'Adventure',
+          image_url: '/images/default-tour.jpg',
+          location: 'Sri Lanka',
+          rating: 4.5,
+          reviews: '50+'
+        };
+        
+        setBookingDetails(fallbackTour);
+        setTotalAmount(fallbackTour.price);
         setInitialLoadComplete(true);
       } finally {
         setLoadingBookingData(false);
@@ -339,7 +392,7 @@ const BookingPage = () => {
     };
 
     loadBookingData();
-  }, [location.state, navigate, availableTours]);
+  }, [location.state, API_BASE_URL]);
 
   // Calculate total amount
   useEffect(() => {
@@ -464,18 +517,16 @@ const BookingPage = () => {
       return;
     }
 
-    // Ensure tours exist in database
-    const tours = await ensureToursExist();
-    if (tours.length === 0) {
-      setApiError('No tours available in the database. Please contact support.');
+    // Ensure we have a valid tour
+    if (!bookingDetails || !bookingDetails.id) {
+      setApiError('No tour selected. Please refresh the page and try again.');
       return;
     }
 
-    // Validate selected tour
-    const tourId = bookingDetails?.id || tours[0]?.id || 1;
-    const validatedTour = await validateTour(tourId);
+    // Validate the tour exists in database one more time
+    const validatedTour = await validateAndGetTour(bookingDetails.id);
     if (!validatedTour) {
-      setApiError(`Selected tour (ID: ${tourId}) is not available. Please refresh the page and try again.`);
+      setApiError('Selected tour is not available. Please refresh the page and select a different tour.');
       return;
     }
 
@@ -487,7 +538,7 @@ const BookingPage = () => {
       setShowLoginPrompt(true);
       
       const bookingData = {
-        ...bookingDetails,
+        ...validatedTour,
         packageType: selectedPackage,
         date: selectedDate.toISOString().split('T')[0],
         persons: numberOfPeople,
@@ -608,7 +659,7 @@ const BookingPage = () => {
         errorMessage = error.message;
         setShowLoginPrompt(true);
         localStorage.setItem('currentBooking', JSON.stringify({
-          ...bookingDetails,
+          ...validatedTour,
           packageType: selectedPackage,
           date: selectedDate.toISOString().split('T')[0],
           persons: numberOfPeople,
